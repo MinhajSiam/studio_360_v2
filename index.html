@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio360 - Premium Photography & Production Studio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;600;700&family=Outfit:wght@300;400;600;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Theme Colors */
+            --bg-main: #0a0a0a;
+            --bg-secondary: #141414;
+            --bg-tabs: #1a1a1a;
+            --primary: #ef4444;
+            --primary-glow: rgba(239, 68, 68, 0.3);
+            --accent: #f87171;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
+            --border-color: #262626;
+            --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .brand-logo span {
+            color: var(--text-main);
+        }
+
+        /*.brand-logo::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--primary);
+        }*/
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-btn {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 100px 20px 60px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 120px 20px 40px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, var(--bg-main) 70%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+            z-index: 0;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 4.8rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--primary-glow);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .btn-outline,
+        .btn-filled {
+            padding: 16px 36px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Outfit', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-filled {
+            border: 1px solid var(--primary);
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-filled:hover {
+            background: #dc2626;
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Row */
+        .stats-row {
+            display: flex;
+            gap: 50px;
+            justify-content: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            color: var(--text-main);
+        }
+
+        .stat-item p {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        /* --- About / Why Choose Us --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            margin-bottom: 20px;
+        }
+
+        .about-features {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .about-features li {
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: #d1d5db;
+        }
+
+        .about-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 24px;
+            height: 24px;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* --- Premium Services Grid --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            transition: var(--transition);
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+            background: #18181b;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: rgba(239, 68, 68, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .service-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .service-link {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .service-link:hover {
+            gap: 10px;
+            color: var(--primary);
+        }
+
+        /* --- Gallery Section --- */
+        .gallery-section {
+            background: var(--bg-tabs);
+            padding: 100px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 0 20px;
+            max-width: 1320px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .gallery-overlay p {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* --- Testimonials --- */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .quote-icon {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 3rem;
+            color: rgba(239, 68, 68, 0.1);
+            font-family: 'Outfit', sans-serif;
+            line-height: 1;
+        }
+
+        .stars {
+            color: #fbbf24;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-card p {
+            font-size: 1.1rem;
+            color: #d1d5db;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .client-info h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+
+        .client-info span {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* --- Equipment Section --- */
+        .eq-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .eq-tag {
+            padding: 12px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: #d1d5db;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .eq-tag:hover {
+            border-color: var(--primary);
+            color: #fff;
+            background: rgba(239, 68, 68, 0.05);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .eq-tag span {
+            color: var(--primary);
+        }
+
+        /* --- Contact & Booking Section --- */
+        .contact-section {
+            padding: 100px 20px;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 50px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 50px;
+        }
+
+        .contact-info h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .info-block {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .info-block .icon {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--primary);
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+        }
+
+        .info-block div h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .info-block div p {
+            color: var(--text-muted);
+            margin-bottom: 0;
+        }
+
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 16px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-main);
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        /* --- Professional Footer --- */
+        footer {
+            background: #050505;
+            border-top: 1px solid var(--border-color);
+            padding: 80px 20px 30px;
+        }
+
+        .footer-container {
+            max-width: 1320px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .footer-col p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-main);
+            color: #fff;
+            outline: none;
+        }
+
+        .newsletter-form button {
+            padding: 12px 20px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .newsletter-form button:hover {
+            background: #dc2626;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* --- Animations --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 0.8s all cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+
+            .contact-wrapper,
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .stats-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+            }
+
+            .form-group {
+                flex-direction: column;
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="#" class="brand-logo">Studio<span>360</span></a>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="pricing.html" class="nav-btn">View Pricing</a>
+    </nav>
+
+    <section id="home" class="hero reveal">
+        <div class="hero-content">
+            <h1>Where Vision Meets<br><span>Perfection.</span></h1>
+            <p>Dhaka's premier production house. From acoustically treated studio rentals to high-end wedding
+                cinematography and commercial product shoots, we bring your ideas to life.</p>
+            <div class="hero-btns">
+                <a href="#contact" class="btn-filled">Book a Shoot</a>
+                <a href="#gallery" class="btn-outline">View Portfolio</a>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>Projects Completed</p>
+            </div>
+            <div class="stat-item">
+                <h3>50+</h3>
+                <p>Corporate Clients</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>Pro Equipment</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container reveal">
+        <div class="about-grid">
+            <div class="about-image">
+                <div
+                    style="width: 100%; height: 500px; background: linear-gradient(45deg, #141414, #1a1a1a); border-radius: 20px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; color: var(--text-muted);">
+                    [Behind The Scenes Image Placeholder]
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>The <span>Creative Edge</span> You Need</h2>
+                <p>At Studio360, we don't just take pictures or record videos; we craft visual narratives. Our team
+                    consists of industry-leading photographers, cinematographers, and art directors dedicated to
+                    delivering raw emotion and cinematic brilliance.</p>
+                <ul class="about-features">
+                    <li>State-of-the-art makeup rooms & props</li>
+                    <li>Advanced color grading & retouching</li>
+                    <li>Customized packages for every budget</li>
+                    <li>Dedicated crew for flawless execution</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="container reveal">
+        <div class="section-header">
+            <h2 class="section-title">Our <span>Premium</span> Services</h2>
+            <p class="section-subtitle">Comprehensive visual solutions tailored for brands, couples, and creators.</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon-wrapper">🎥</div>
+                <h3>Studio Rent & Podcast</h3>
+                <p>Fully equipped, acoustically treated studio spaces for your next big shoot or professional podcast
+                    series.</p>
+                <a href="pricing.html" class="service-link">View Pricing &rarr;</a>
+            </div>
+            <div class="service-card">
+                <div class="icon-wrapper">💍</div>
+                <h3>Wedding Cinematography</h3>
+                <p>Daylong coverage with multiple photographers, cinematographers, and drone pilots to capture your
+                    special day.</p>
+                <a href="pricing.html" class="service-link">View Pricing &rarr;</a>
+            </div>
+            <div class="service-card">
+                <div class="icon-wrapper">🛍️</div>
+                <h3>Product & Food Shoot</h3>
+                <p>High-end retouching and styling for e-commerce products, clothing, and culinary masterpieces.</p>
+                <a href="pricing.html" class="service-link">View Pricing &rarr;</a>
+            </div>
+            <div class="service-card">
+                <div class="icon-wrapper">🎬</div>
+                <h3>Agency & Promos</h3>
+                <p>Corporate presentations, news reads, explainer videos, and social media reels with professional
+                    presenters.</p>
+                <a href="pricing.html" class="service-link">View Pricing &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section reveal">
+        <div class="section-header">
+            <h2 class="section-title">Latest <span>Masterpieces</span></h2>
+            <p class="section-subtitle">A glimpse into our recent shoots, weddings, and commercial projects.</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=800"
+                    alt="Wedding">
+                <div class="gallery-overlay">
+                    <h4>Royal Wedding</h4>
+                    <p>Cinematography</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1590845947698-8924d7409b56?auto=format&fit=crop&q=80&w=800"
+                    alt="Podcast">
+                <div class="gallery-overlay">
+                    <h4>The Insights Podcast</h4>
+                    <p>Studio Production</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&q=80&w=800"
+                    alt="Product">
+                <div class="gallery-overlay">
+                    <h4>Apparel Line</h4>
+                    <p>Product Shoot</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80&w=800"
+                    alt="Food">
+                <div class="gallery-overlay">
+                    <h4>Gourmet Menu</h4>
+                    <p>Food Photography</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800"
+                    alt="Gear">
+                <div class="gallery-overlay">
+                    <h4>Behind The Lens</h4>
+                    <p>Studio Setup</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1533174000255-14eb042d3855?auto=format&fit=crop&q=80&w=800"
+                    alt="Event">
+                <div class="gallery-overlay">
+                    <h4>Corporate Summit</h4>
+                    <p>Event Coverage</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container reveal">
+        <div class="section-header">
+            <h2 class="section-title">Client <span>Stories</span></h2>
+            <p class="section-subtitle">Don't just take our word for it. Here's what our clients have to say.</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <div class="stars">★★★★★</div>
+                <p>The team at Studio360 is incredibly professional. They handled our entire e-commerce product shoot,
+                    and the color grading was absolutely world-class.</p>
+                <div class="client-info">
+                    <h4>Ahmed Hasan</h4>
+                    <span>CEO, StyleBrand</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <div class="stars">★★★★★</div>
+                <p>We rented the studio for our podcast series. The audio setup and lighting were perfect. Highly
+                    recommend their premium packages.</p>
+                <div class="client-info">
+                    <h4>Tariq Rahman</h4>
+                    <span>Content Creator</span>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="quote-icon">"</div>
+                <div class="stars">★★★★★</div>
+                <p>They captured my wedding flawlessly. The cinematographers were unobtrusive, yet they didn't miss a
+                    single special moment. Truly magical.</p>
+                <div class="client-info">
+                    <h4>Sadia & Imran</h4>
+                    <span>Happy Couple</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section id="equipment" class="gallery-section reveal" style="padding: 60px 0;">
+        <div class="section-header" style="margin-bottom: 40px;">
+            <h2 class="section-title" style="font-size: 2.2rem;">Powered By <span>Pro Gear</span></h2>
+        </div>
+        <div class="eq-grid">
+            <div class="eq-tag"><span>•</span> Sony A7S III / FX3</div>
+            <div class="eq-tag"><span>•</span> RED Digital Cinema</div>
+            <div class="eq-tag"><span>•</span> Godox Studio Strobes</div>
+            <div class="eq-tag"><span>•</span> DJI Ronin Stabilizers</div>
+            <div class="eq-tag"><span>•</span> Aputure Video Lighting</div>
+            <div class="eq-tag"><span>•</span> DJI Mavic 3 Pro</div>
+        </div>
+    </section> -->
+
+    <style>
+        /* --- Gear/Equipment Section Styles --- */
+        .equipment-section {
+            background: var(--bg-tabs);
+            padding: 100px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .gear-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .gear-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Glowing Top Line */
+        .gear-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gear-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(239, 68, 68, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(239, 68, 68, 0.15);
+            background: #18181b;
+        }
+
+        .gear-card:hover::before {
+            opacity: 1;
+        }
+
+        .gear-icon {
+            width: 65px;
+            height: 65px;
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+            box-shadow: inset 0 0 15px rgba(239, 68, 68, 0.1);
+        }
+
+        .gear-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .gear-list {
+            list-style: none;
+        }
+
+        .gear-list li {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: var(--transition);
+        }
+
+        .gear-card:hover .gear-list li {
+            color: #e5e7eb;
+        }
+
+        /* Custom Glowing Bullet Points */
+        .gear-list li::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px var(--primary-glow);
+            flex-shrink: 0;
+        }
+    </style>
+
+    <section id="equipment" class="equipment-section reveal">
+        <div class="container" style="padding-top: 0; padding-bottom: 0;">
+            <div class="section-header">
+                <h2 class="section-title">Powered By <span>Pro Gear</span></h2>
+                <p class="section-subtitle">We don't compromise on quality. Our studio is equipped with industry-leading
+                    technology to ensure cinematic brilliance for every shot.</p>
+            </div>
+
+            <div class="gear-grid">
+                <div class="gear-card">
+                    <div class="gear-icon">🎥</div>
+                    <h3>Cameras & Lenses</h3>
+                    <ul class="gear-list">
+                        <li>RED Digital Cinema</li>
+                        <li>Sony A7S III / FX3</li>
+                        <li>Sony G-Master Lenses</li>
+                        <li>Sigma Art Series</li>
+                    </ul>
+                </div>
+
+                <div class="gear-card">
+                    <div class="gear-icon">💡</div>
+                    <h3>Pro Lighting</h3>
+                    <ul class="gear-list">
+                        <li>Aputure Video Lights</li>
+                        <li>Godox Studio Strobes</li>
+                        <li>RGB Tube Lights</li>
+                        <li>Softboxes & Modifiers</li>
+                    </ul>
+                </div>
+
+                <div class="gear-card">
+                    <div class="gear-icon">🚁</div>
+                    <h3>Drones & Gimbals</h3>
+                    <ul class="gear-list">
+                        <li>DJI Mavic 3 Pro</li>
+                        <li>DJI Ronin RS3 Pro</li>
+                        <li>Easyrig System</li>
+                        <li>Heavy-Duty Tripods</li>
+                    </ul>
+                </div>
+
+                <div class="gear-card">
+                    <div class="gear-icon">🎙️</div>
+                    <h3>Audio Setup</h3>
+                    <ul class="gear-list">
+                        <li>RODE Audio Interfaces</li>
+                        <li>Sennheiser Wireless Mics</li>
+                        <li>Shure Podcast Mics</li>
+                        <li>Zoom Field Recorders</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section reveal">
+        <div class="container" style="padding: 0;">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>Get in <span>Touch</span></h2>
+                    <p>Ready to start your next masterpiece? Fill out the form or reach out to us directly. We're here
+                        to bring your vision to life.</p>
+
+                    <div class="info-block">
+                        <div class="icon">📍</div>
+                        <div>
+                            <h4>Visit Our Studio</h4>
+                            <p>1/1, Meghna Shopping Complex, Rofiqul Islam Road, Shonir Akhra, Dhaka-1236</p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="icon">📞</div>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p>+880 1632 344 221</p>
+                        </div>
+                    </div>
+                    <div class="info-block">
+                        <div class="icon">✉️</div>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p>teams.studio360@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="booking-form" onsubmit="event.preventDefault(); alert('Request Submitted Successfully!');">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Your Name" required>
+                        <input type="tel" class="form-control" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" required>
+                            <option value="" disabled selected>Select Service</option>
+                            <option value="rent">Studio Rent</option>
+                            <option value="product">Product/Food Shoot</option>
+                            <option value="wedding">Wedding/Event</option>
+                            <option value="video">Videography/Podcast</option>
+                        </select>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <textarea class="form-control" placeholder="Tell us about your project requirements..."
+                        required></textarea>
+                    <button type="submit" class="btn-filled">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-container reveal">
+            <div class="footer-col">
+                <a href="#" class="brand-logo"
+                    style="font-size: 1.8rem; margin-bottom: 20px; display: inline-flex;">Studio<span>360</span></a>
+                <p>The ultimate production house in Dhaka. We specialize in high-end photography, cinematic videography,
+                    and premium studio rentals for creators and brands.</p>
+                <div class="social-links">
+                    <a href="#">Fb</a>
+                    <a href="#">Ig</a>
+                    <a href="#">Yt</a>
+                    <a href="#">In</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#gallery">Portfolio</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Our Services</h3>
+                <ul class="footer-links">
+                    <li><a href="pricing.html#wedding">Wedding Photography</a></li>
+                    <li><a href="pricing.html#product">Product Shoot</a></li>
+                    <li><a href="pricing.html#video">Podcast Production</a></li>
+                    <li><a href="pricing.html#agency">Agency Promos</a></li>
+                    <li><a href="pricing.html#rent">Studio Rent</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest updates, creative tips, and exclusive studio discount
+                    offers.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Studio360. All Rights Reserved. Crafted for Creators.</p>
+        </div>
+    </footer>
+
+    <script>
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+    </script>
+
+</body>
+
+</html>
