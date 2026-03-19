@@ -1245,7 +1245,7 @@
         const packageNameDisplay = document.getElementById('selectedPackageName');
         const hiddenPackageInput = document.getElementById('hiddenPackageInput');
 
-        // Select all 'Book Now' buttons
+        // ১. Book Now বাটনে ক্লিক করলে Modal ওপেন করার কোড (যেটা মুছে গিয়েছিল)
         const bookButtons = document.querySelectorAll('.card .btn');
 
         bookButtons.forEach(button => {
@@ -1264,7 +1264,61 @@
             });
         });
 
-        // Function to close modal
+
+        // ২. ফর্ম সাবমিট করে Google Sheet এ ডেটা পাঠানোর কোড
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyj_2N55-n7WFFEbnzcfMiOIviBy_kBXbvkJpvuT1UnzVoPobjg2Z8KucdpQPydprrJ/exec';
+
+        const form = document.querySelector('.modal-form');
+        const submitBtn = document.querySelector('.btn-submit');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // বাটনের টেক্সট পরিবর্তন করে লোডিং স্টেট দেখানো
+            const originalBtnText = submitBtn.innerText;
+            submitBtn.innerText = 'Submitting...';
+            submitBtn.disabled = true;
+
+            // ফর্মের ডেটা সংগ্রহ করা
+            const inputs = form.querySelectorAll('input, textarea');
+            const data = {
+                name: inputs[0].value,
+                phone: inputs[1].value,
+                email: inputs[2].value,
+                package: document.getElementById('hiddenPackageInput').value,
+                notes: inputs[4].value
+            };
+
+            try {
+                // Google Apps Script এ POST Request পাঠানো
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8',
+                    }
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    alert('Booking Request Received! Check your WhatsApp for confirmation.');
+                    form.reset();
+                    closeModal();
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                alert('Network Error! Please try again.');
+            } finally {
+                // বাটন আবার আগের অবস্থায় ফিরিয়ে আনা
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+
+
+        // ৩. Modal Close করার ফাংশন
         function closeModal() {
             modal.classList.remove('active');
         }
