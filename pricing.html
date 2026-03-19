@@ -641,6 +641,55 @@
             box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
         }
 
+        /* --- Custom Toast Notification Styles --- */
+        .toast-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid #10b981;
+            /* Success Green */
+            border-radius: 12px;
+            padding: 16px 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            z-index: 3000;
+            transform: translateX(120%);
+            /* Hidden state */
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            /* Bouncy animation */
+        }
+
+        .toast-container.show {
+            transform: translateX(0);
+            /* Visible state */
+            opacity: 1;
+        }
+
+        .toast-icon {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+        }
+
+        .toast-message {
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
         /* --- Responsive --- */
         @media (max-width: 992px) {
             .footer-container {
@@ -1141,8 +1190,9 @@
                 <p id="selectedPackageName">Package: Basic</p>
             </div>
 
-            <form class="modal-form"
-                onsubmit="event.preventDefault(); alert('Booking Request Received! Our team will contact you shortly.'); closeModal();">
+            <!-- <form class="modal-form"
+                onsubmit="event.preventDefault(); alert('Booking Request Received! Our team will contact you shortly.'); closeModal();"> -->
+            <form class="modal-form">
                 <input type="text" class="modal-input" placeholder="Your Full Name" required>
                 <input type="tel" class="modal-input" placeholder="Phone Number" required>
                 <input type="email" class="modal-input" placeholder="Email Address (Optional)">
@@ -1280,13 +1330,13 @@
             submitBtn.disabled = true;
 
             // ফর্মের ডেটা সংগ্রহ করা
-            const inputs = form.querySelectorAll('input, textarea');
+            const inputs = form.querySelectorAll('input');
             const data = {
                 name: inputs[0].value,
                 phone: inputs[1].value,
                 email: inputs[2].value,
                 package: document.getElementById('hiddenPackageInput').value,
-                notes: inputs[4].value
+                notes: form.querySelector('textarea').value // সিরিয়াল নাম্বারের বদলে সরাসরি Textarea কে কল করা হয়েছে
             };
 
             try {
@@ -1294,28 +1344,65 @@
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     body: JSON.stringify(data),
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8',
-                    }
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
                 });
 
                 const result = await response.json();
 
                 if (result.status === "success") {
-                    alert('Booking Request Received! Check your WhatsApp for confirmation.');
+                    const studioWhatsAppNumber = '8801700000000'; // আপনার নাম্বার দিন
+                    const waMessage = `Hello Studio360 Team! 🎥\n\nI have just submitted a booking request from your website.\n\nName: ${data.name}\nPackage: ${data.package}\nPhone: ${data.phone}\n\nPlease confirm my booking.`;
+                    const whatsappURL = `https://wa.me/${studioWhatsAppNumber}?text=${encodeURIComponent(waMessage)}`;
+
+                    // Alert এর বদলে কাস্টম Toast দেখানো
+                    showToast('Booking Successful! Redirecting...', false);
+
                     form.reset();
                     closeModal();
+
+                    // ইউজারকে Toast পড়ার সুযোগ দেওয়ার জন্য ১.৫ সেকেন্ড পর রিডাইরেক্ট করা
+                    setTimeout(() => {
+                        window.open(whatsappURL, '_blank');
+                    }, 1500);
+
                 } else {
-                    alert('Something went wrong. Please try again.');
+                    showToast('Something went wrong. Please try again.', true);
                 }
             } catch (error) {
-                alert('Network Error! Please try again.');
+                showToast('Network Error! Please check your connection.', true);
             } finally {
-                // বাটন আবার আগের অবস্থায় ফিরিয়ে আনা
                 submitBtn.innerText = originalBtnText;
                 submitBtn.disabled = false;
             }
         });
+
+        // --- Toast Show Function ---
+        function showToast(message, isError = false) {
+            const toast = document.getElementById('toast');
+            const toastMessage = toast.querySelector('.toast-message');
+            const toastIcon = toast.querySelector('.toast-icon');
+
+            toastMessage.innerText = message;
+
+            if (isError) {
+                toast.style.borderLeftColor = 'var(--primary)'; // Red for error
+                toastIcon.style.color = 'var(--primary)';
+                toastIcon.style.background = 'rgba(239, 68, 68, 0.1)';
+                toastIcon.innerText = '✕';
+            } else {
+                toast.style.borderLeftColor = '#10b981'; // Green for success
+                toastIcon.style.color = '#10b981';
+                toastIcon.style.background = 'rgba(16, 185, 129, 0.1)';
+                toastIcon.innerText = '✓';
+            }
+
+            toast.classList.add('show');
+
+            // ৩.৫ সেকেন্ড পর Toast নিজে থেকে লুকিয়ে যাবে
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3500);
+        };
 
 
         // ৩. Modal Close করার ফাংশন
@@ -1330,6 +1417,12 @@
             }
         }
     </script>
+
+
+    <div id="toast" class="toast-container">
+        <div class="toast-icon">✓</div>
+        <div class="toast-message">Booking Request Received!</div>
+    </div>
 
 </body>
 
