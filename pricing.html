@@ -515,6 +515,132 @@
             font-size: 0.95rem;
         }
 
+        /* --- Modal / Pop-up Form Styles --- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--primary);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px 30px;
+            position: relative;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0) scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: var(--text-muted);
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .modal-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            color: var(--text-main);
+        }
+
+        .modal-header p {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 5px;
+            font-size: 1.1rem;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-family: 'Hind Siliguri', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .modal-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        textarea.modal-input {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            margin-top: 10px;
+            padding: 16px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-submit:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+        }
+
         /* --- Responsive --- */
         @media (max-width: 992px) {
             .footer-container {
@@ -1007,6 +1133,27 @@
 
     </div>
 
+    <div id="bookingModal" class="modal-overlay">
+        <div class="modal-box">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Confirm Booking</h2>
+                <p id="selectedPackageName">Package: Basic</p>
+            </div>
+
+            <form class="modal-form"
+                onsubmit="event.preventDefault(); alert('Booking Request Received! Our team will contact you shortly.'); closeModal();">
+                <input type="text" class="modal-input" placeholder="Your Full Name" required>
+                <input type="tel" class="modal-input" placeholder="Phone Number" required>
+                <input type="email" class="modal-input" placeholder="Email Address (Optional)">
+                <input type="date" class="modal-input" required>
+                <input type="hidden" id="hiddenPackageInput" name="booked_package">
+                <textarea class="modal-input" placeholder="Any specific instructions or requirements?"></textarea>
+                <button type="submit" class="btn-submit">Submit Booking</button>
+            </form>
+        </div>
+    </div>
+
     <footer>
         <div class="footer-container reveal">
             <div class="footer-col">
@@ -1091,6 +1238,41 @@
                         btn.classList.add("active");
                     }
                 }
+            }
+        }
+        // --- Modal JavaScript ---
+        const modal = document.getElementById('bookingModal');
+        const packageNameDisplay = document.getElementById('selectedPackageName');
+        const hiddenPackageInput = document.getElementById('hiddenPackageInput');
+
+        // Select all 'Book Now' buttons
+        const bookButtons = document.querySelectorAll('.card .btn');
+
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function (e) {
+                // Find the package name from the clicked card
+                const card = e.target.closest('.card');
+                const pkgName = card.querySelector('.package-name').innerText;
+                const price = card.querySelector('.price').innerText.replace(' BDT', '');
+
+                // Update Modal Content
+                packageNameDisplay.innerText = `Package: ${pkgName} (${price} BDT)`;
+                hiddenPackageInput.value = `${pkgName} - ${price} BDT`;
+
+                // Show Modal
+                modal.classList.add('active');
+            });
+        });
+
+        // Function to close modal
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        // Close modal when clicking outside the box (on the overlay)
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                closeModal();
             }
         }
     </script>
