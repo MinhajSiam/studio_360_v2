@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Freelance Photographer | Studio360</title>
+    <title>Creator Registration | Studio360</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
         rel="stylesheet">
@@ -118,6 +118,26 @@
                 transform: scale(1);
             }
         }
+
+        /* Smooth transitions for dynamic sections */
+        .dynamic-section {
+            transition: all 0.4s ease-in-out;
+            overflow: hidden;
+        }
+
+        .section-hidden {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+            pointer-events: none;
+        }
+
+        .section-visible {
+            max-height: 1000px;
+            /* Arbitrary large number to allow content to expand */
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -127,6 +147,7 @@
     <div
         class="max-w-4xl w-full bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-white/50 animate-fade-in-up backdrop-blur-sm">
 
+        <!-- Header -->
         <div class="bg-white py-10 px-8 md:px-12 relative overflow-hidden border-b border-gray-100">
             <div
                 class="absolute top-0 right-0 w-72 h-72 bg-red-50 rounded-full blur-3xl opacity-60 transform translate-x-1/3 -translate-y-1/3">
@@ -161,15 +182,36 @@
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
                         </span>
-                        <span class="text-sm font-bold text-red-700 tracking-wide">ফটোগ্রাফার পোর্টাল</span>
+                        <span class="text-sm font-bold text-red-700 tracking-wide">ক্রিয়েটর পোর্টাল</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <form id="photographerRegistrationForm" class="py-10 px-8 md:px-12 space-y-10 bg-white">
+        <form id="creatorRegistrationForm" class="py-10 px-8 md:px-12 space-y-10 bg-white">
 
-            <div class="animate-fade-in-up delay-100">
+            <!-- Role Selection -->
+            <div class="animate-fade-in-up delay-100 bg-gray-50 p-6 rounded-2xl border border-gray-200">
+                <h2 class="text-xl font-bold text-gray-800 mb-4 text-center">আপনি কোন পজিশনের জন্য আবেদন করছেন?</h2>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8">
+                    <label
+                        class="relative flex items-center p-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:bg-red-50 transition-all w-full sm:w-auto has-[:checked]:border-red-500 has-[:checked]:bg-red-50">
+                        <input type="radio" name="creatorRole" value="photographer"
+                            class="w-5 h-5 text-red-600 focus:ring-red-500 mr-3" checked>
+                        <span class="font-semibold text-gray-700 text-lg">ফটোগ্রাফার</span>
+                    </label>
+
+                    <label
+                        class="relative flex items-center p-3 rounded-xl border-2 border-gray-200 cursor-pointer hover:bg-red-50 transition-all w-full sm:w-auto has-[:checked]:border-red-500 has-[:checked]:bg-red-50">
+                        <input type="radio" name="creatorRole" value="videographer"
+                            class="w-5 h-5 text-red-600 focus:ring-red-500 mr-3">
+                        <span class="font-semibold text-gray-700 text-lg">ভিডিওগ্রাফার</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Common: Personal Info -->
+            <div class="animate-fade-in-up delay-200">
                 <div class="flex items-center mb-6">
                     <span class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -213,7 +255,8 @@
 
             <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8"></div>
 
-            <div class="animate-fade-in-up delay-200">
+            <!-- Dynamic Section: Technical Gear & Skills -->
+            <div class="animate-fade-in-up delay-300">
                 <div class="flex items-center mb-6">
                     <span class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +269,9 @@
                     </span>
                     <h2 class="text-2xl font-bold text-gray-800">গিয়ার এবং দক্ষতা</h2>
                 </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Common Gear Field -->
                     <div class="input-group">
                         <label class="block text-sm font-semibold text-gray-600 mb-2">ক্যামেরা বডি <span
                                 class="text-red-500">*</span></label>
@@ -241,31 +286,62 @@
                             class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
                             placeholder="যেমন: 24-70mm f2.8, 85mm f1.8">
                     </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">বিশেষজ্ঞতা (Specialty) <span
-                                class="text-red-500">*</span></label>
-                        <select required
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm appearance-none cursor-pointer">
-                            <option value="">নির্বাচন করুন</option>
-                            <option value="wedding">ওয়েডিং ও ইভেন্ট</option>
-                            <option value="fashion">ফ্যাশন ও পোর্ট্রেট</option>
-                            <option value="product">প্রোডাক্ট ও কমার্শিয়াল</option>
-                            <option value="all">অলরাউন্ডার</option>
-                        </select>
+
+                    <!-- Photographer Specific Fields -->
+                    <div id="photoGearSection"
+                        class="dynamic-section section-visible col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label class="block text-sm font-semibold text-gray-600 mb-2">বিশেষজ্ঞতা (Photography) <span
+                                    class="text-red-500">*</span></label>
+                            <select
+                                class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm appearance-none cursor-pointer photo-required">
+                                <option value="">নির্বাচন করুন</option>
+                                <option value="wedding">ওয়েডিং ও ইভেন্ট</option>
+                                <option value="fashion">ফ্যাশন ও পোর্ট্রেট</option>
+                                <option value="product">প্রোডাক্ট ও কমার্শিয়াল</option>
+                                <option value="all">অলরাউন্ডার</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label class="block text-sm font-semibold text-gray-600 mb-2">লাইটস্ট্যান্ড ও ফ্ল্যাশ
+                                কালেকশন</label>
+                            <input type="text"
+                                class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
+                                placeholder="যেমন: Godox AD200, V860III (যদি থাকে)">
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">লাইটস্ট্যান্ড ও ফ্ল্যাশ
-                            কালেকশন</label>
-                        <input type="text"
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
-                            placeholder="যেমন: Godox AD200, V860III (যদি থাকে)">
+
+                    <!-- Videographer Specific Fields -->
+                    <div id="videoGearSection"
+                        class="dynamic-section section-hidden col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="input-group">
+                            <label class="block text-sm font-semibold text-gray-600 mb-2">গিম্বল/স্ট্যাবিলাইজার <span
+                                    class="text-red-500">*</span></label>
+                            <input type="text"
+                                class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm video-required"
+                                placeholder="যেমন: DJI RS3, Zhiyun Crane">
+                        </div>
+                        <div class="input-group">
+                            <label class="block text-sm font-semibold text-gray-600 mb-2">অডিও/ড্রোন ইকুইপমেন্ট (যদি
+                                থাকে)</label>
+                            <input type="text"
+                                class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
+                                placeholder="যেমন: Rode Wireless GO, DJI Mini 3">
+                        </div>
+                        <div class="input-group md:col-span-2">
+                            <label class="block text-sm font-semibold text-gray-600 mb-2">ভিডিও এডিটিং দক্ষতা</label>
+                            <input type="text"
+                                class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
+                                placeholder="যেমন: Premiere Pro, DaVinci Resolve">
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8"></div>
 
-            <div class="animate-fade-in-up delay-300">
+            <!-- Common: Professional Experience -->
+            <div class="animate-fade-in-up delay-400">
                 <div class="flex items-center mb-6">
                     <span class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -288,10 +364,12 @@
                             <option value="5+">৫ বছরের বেশি</option>
                         </select>
                     </div>
+
+                    <!-- Dynamic Portfolio Links -->
                     <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">পোর্টফোলিও লিংক <span
-                                class="text-red-500">*</span></label>
-                        <input type="url" required
+                        <label id="portfolioLabel" class="block text-sm font-semibold text-gray-600 mb-2">পোর্টফোলিও
+                            লিংক <span class="text-red-500">*</span></label>
+                        <input type="url" required id="portfolioInput"
                             class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
                             placeholder="Behance / Google Drive / Website">
                     </div>
@@ -300,7 +378,8 @@
 
             <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8"></div>
 
-            <div class="animate-fade-in-up delay-400">
+            <!-- Dynamic Section: Work Samples Upload -->
+            <div class="animate-fade-in-up delay-500">
                 <div class="flex items-center mb-6">
                     <span class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -312,9 +391,11 @@
                     <h2 class="text-2xl font-bold text-gray-800">সেরা কাজের নমুনা</h2>
                 </div>
 
-                <div class="relative group cursor-pointer w-full">
+                <!-- Image Upload (Photographer) -->
+                <div id="photoUploadSection"
+                    class="dynamic-section section-visible relative group cursor-pointer w-full">
                     <input type="file" id="workSamples" accept="image/*" multiple
-                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required>
+                        class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10 photo-required">
                     <div
                         class="h-full border-2 border-dashed border-gray-300 rounded-2xl p-10 text-center group-hover:border-red-500 group-hover:bg-red-50 transition-all duration-300 bg-gray-50 flex flex-col justify-center items-center">
                         <div
@@ -331,9 +412,18 @@
                         <div id="workSamplesPreview" class="image-preview-grid w-full mt-6"></div>
                     </div>
                 </div>
+
+                <!-- Video Link (Videographer) -->
+                <div id="videoUploadSection" class="dynamic-section section-hidden input-group mt-4">
+                    <label class="block text-sm font-semibold text-gray-600 mb-2">আপনার তৈরি ২-৩টি বেস্ট ভিডিওর লিংক দিন
+                        (YouTube/Drive) <span class="text-red-500">*</span></label>
+                    <textarea rows="3"
+                        class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm video-required"
+                        placeholder="১. https://...&#10;২. https://..."></textarea>
+                </div>
             </div>
 
-            <div class="pt-8 animate-fade-in-up delay-500">
+            <div class="pt-8">
                 <button type="submit"
                     class="btn-gradient w-full bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white font-bold text-xl py-4 rounded-xl shadow-lg shadow-red-500/30 hover:shadow-red-500/50 focus:outline-none focus:ring-4 focus:ring-red-300 transform active:scale-95">
                     আবেদন জমা দিন
@@ -353,7 +443,80 @@
     </div>
 
     <script>
-        // Multiple File Upload with Image Preview
+        // --- Dynamic Form Logic ---
+        const radioBtns = document.querySelectorAll('input[name="creatorRole"]');
+
+        const photoGearSection = document.getElementById('photoGearSection');
+        const videoGearSection = document.getElementById('videoGearSection');
+
+        const photoUploadSection = document.getElementById('photoUploadSection');
+        const videoUploadSection = document.getElementById('videoUploadSection');
+
+        const portfolioLabel = document.getElementById('portfolioLabel');
+        const portfolioInput = document.getElementById('portfolioInput');
+
+        // Elements that need required attribute toggled
+        const photoRequiredElements = document.querySelectorAll('.photo-required');
+        const videoRequiredElements = document.querySelectorAll('.video-required');
+
+        // Function to toggle sections based on selected role
+        function toggleSections(role) {
+            if (role === 'photographer') {
+                // Show Photo sections
+                photoGearSection.classList.remove('section-hidden');
+                photoGearSection.classList.add('section-visible');
+                photoUploadSection.classList.remove('section-hidden');
+                photoUploadSection.classList.add('section-visible');
+
+                // Hide Video sections
+                videoGearSection.classList.remove('section-visible');
+                videoGearSection.classList.add('section-hidden');
+                videoUploadSection.classList.remove('section-visible');
+                videoUploadSection.classList.add('section-hidden');
+
+                // Update Text
+                portfolioLabel.innerHTML = 'পোর্টফোলিও লিংক (Photography) <span class="text-red-500">*</span>';
+                portfolioInput.placeholder = 'Behance / Drive / 500px';
+
+                // Toggle Required Attributes
+                photoRequiredElements.forEach(el => el.setAttribute('required', 'true'));
+                videoRequiredElements.forEach(el => el.removeAttribute('required'));
+
+            } else if (role === 'videographer') {
+                // Show Video sections
+                videoGearSection.classList.remove('section-hidden');
+                videoGearSection.classList.add('section-visible');
+                videoUploadSection.classList.remove('section-hidden');
+                videoUploadSection.classList.add('section-visible');
+
+                // Hide Photo sections
+                photoGearSection.classList.remove('section-visible');
+                photoGearSection.classList.add('section-hidden');
+                photoUploadSection.classList.remove('section-visible');
+                photoUploadSection.classList.add('section-hidden');
+
+                // Update Text
+                portfolioLabel.innerHTML = 'পোর্টফোলিও/শো-রিল লিংক (Videography) <span class="text-red-500">*</span>';
+                portfolioInput.placeholder = 'YouTube / Vimeo / Drive';
+
+                // Toggle Required Attributes
+                videoRequiredElements.forEach(el => el.setAttribute('required', 'true'));
+                photoRequiredElements.forEach(el => el.removeAttribute('required'));
+            }
+        }
+
+        // Add event listeners to radio buttons
+        radioBtns.forEach(btn => {
+            btn.addEventListener('change', (e) => {
+                toggleSections(e.target.value);
+            });
+        });
+
+        // Initialize state on page load
+        toggleSections('photographer'); // Default selected value
+
+
+        // --- Multiple File Upload with Image Preview ---
         document.getElementById('workSamples').addEventListener('change', function (e) {
             const container = document.getElementById('workSamplesPreview');
             container.innerHTML = ''; // Clear previous
@@ -375,8 +538,8 @@
             }
         });
 
-        // Form submission animation
-        document.getElementById('photographerRegistrationForm').addEventListener('submit', function (e) {
+        // --- Form submission simulation ---
+        document.getElementById('creatorRegistrationForm').addEventListener('submit', function (e) {
             e.preventDefault();
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const successMsg = document.getElementById('successMessage');
@@ -394,6 +557,8 @@
                 setTimeout(() => {
                     this.reset();
                     document.getElementById('workSamplesPreview').innerHTML = '';
+                    // Re-initialize state
+                    toggleSections('photographer');
                     successMsg.classList.add('hidden');
                 }, 4000);
             }, 1500);
