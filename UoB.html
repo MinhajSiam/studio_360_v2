@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Growth & Digital Marketing Strategy | UoB</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        uobNavy: '#0f172a', /* slate-900 */
+                        uobGold: '#f59e0b', /* amber-500 */
+                        uobLight: '#f8fafc',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Utilities for Cinematic & Premium Feel */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, visibility;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .bg-hero-pattern {
+            background-image: linear-gradient(to right bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+
+<body class="font-sans bg-slate-50 text-slate-800 antialiased selection:bg-uobGold selection:text-uobNavy">
+
+    <!-- 1. Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center bg-hero-pattern overflow-hidden">
+        <div class="absolute inset-0 bg-uobNavy/40 mix-blend-multiply"></div>
+        <div class="relative z-10 text-center px-4 max-w-5xl mx-auto fade-in-section">
+            <div
+                class="inline-block mb-4 px-4 py-1.5 rounded-full border border-uobGold/30 bg-uobGold/10 text-uobGold text-sm font-semibold tracking-wider uppercase">
+                Strategic Proposal
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight">
+                Business Growth & <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-uobGold to-yellow-300">Marketing
+                    Strategy Plan</span>
+            </h1>
+            <p class="text-lg md:text-2xl text-slate-300 mb-10 font-light max-w-3xl mx-auto">
+                Empowering the 21st Century with University of Brahmanbaria (UoB)
+            </p>
+            <a href="#current-status"
+                class="inline-flex items-center gap-2 bg-uobGold hover:bg-yellow-400 text-uobNavy font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-[0_0_20px_rgba(245,158,11,0.4)]">
+                View Strategy <i class="fa-solid fa-arrow-down"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- 2. Current Status (Brand Overview) -->
+    <section id="current-status" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-4xl font-bold text-uobNavy mb-4">Current Status & Brand Overview</h2>
+                <div class="w-24 h-1 bg-uobGold mx-auto rounded"></div>
+                <p class="mt-6 text-lg text-slate-600 max-w-3xl mx-auto">
+                    UoB stands proud as a <strong>UGC and Government Approved</strong> university, strategically located
+                    at the heart of the city, serving as a beacon of modern education.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Faculties -->
+                <div
+                    class="glass-card p-8 rounded-2xl fade-in-section hover:-translate-y-2 transition-transform duration-300">
+                    <div
+                        class="w-12 h-12 bg-blue-100 text-uobNavy rounded-lg flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-uobNavy mb-4">Academic Faculties</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li><i class="fa-solid fa-check text-uobGold mr-2"></i> Science & Tech (CSE, EEE)</li>
+                        <li><i class="fa-solid fa-check text-uobGold mr-2"></i> Business Admin (BBA, MBA)</li>
+                        <li><i class="fa-solid fa-check text-uobGold mr-2"></i> Arts (English)</li>
+                        <li><i class="fa-solid fa-check text-uobGold mr-2"></i> Social Science (Sociology, PGD)</li>
+                        <li><i class="fa-solid fa-check text-uobGold mr-2"></i> Law (LLB)</li>
+                    </ul>
+                </div>
+
+                <!-- Facilities -->
+                <div class="glass-card p-8 rounded-2xl fade-in-section hover:-translate-y-2 transition-transform duration-300"
+                    style="transition-delay: 100ms;">
+                    <div
+                        class="w-12 h-12 bg-blue-100 text-uobNavy rounded-lg flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-uobNavy mb-4">Key Facilities</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li><i class="fa-solid fa-book-open text-uobGold mr-2"></i> Modern Library</li>
+                        <li><i class="fa-solid fa-display text-uobGold mr-2"></i> Multimedia Classrooms</li>
+                        <li><i class="fa-solid fa-network-wired text-uobGold mr-2"></i> Computer Labs & Wi-Fi</li>
+                        <li><i class="fa-solid fa-shield-halved text-uobGold mr-2"></i> Secured Environment</li>
+                    </ul>
+                </div>
+
+                <!-- PR Milestones -->
+                <div class="glass-card p-8 rounded-2xl fade-in-section hover:-translate-y-2 transition-transform duration-300"
+                    style="transition-delay: 200ms;">
+                    <div
+                        class="w-12 h-12 bg-blue-100 text-uobNavy rounded-lg flex items-center justify-center text-xl mb-6">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-uobNavy mb-4">Recent PR Milestones</h3>
+                    <ul class="space-y-3 text-slate-600">
+                        <li><i class="fa-solid fa-star text-uobGold mr-2"></i> 1st NILS UoB Moot Court</li>
+                        <li><i class="fa-solid fa-star text-uobGold mr-2"></i> OBE-based Evaluation Awards</li>
+                        <li><i class="fa-solid fa-star text-uobGold mr-2"></i> Environment Club Initiatives</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Areas of Improvement -->
+    <section class="py-24 bg-slate-50 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-4xl font-bold text-uobNavy mb-4">Growth Opportunities</h2>
+                <div class="w-24 h-1 bg-uobGold mx-auto rounded"></div>
+                <p class="mt-6 text-lg text-slate-600 max-w-2xl mx-auto">Identifying core areas where digital
+                    transformation can drive immediate business growth and institutional prestige.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 fade-in-section group hover:border-uobGold/50 transition-colors">
+                    <div class="text-uobGold text-3xl mb-4 group-hover:scale-110 transition-transform origin-left"><i
+                            class="fa-solid fa-chart-pie"></i></div>
+                    <h4 class="text-xl font-bold text-uobNavy mb-3">Digital Footprint</h4>
+                    <p class="text-slate-600 leading-relaxed">Closing the gap in targeted lead generation specifically
+                        tailored for upcoming admission fairs and academic intakes.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 fade-in-section group hover:border-uobGold/50 transition-colors"
+                    style="transition-delay: 100ms;">
+                    <div class="text-uobGold text-3xl mb-4 group-hover:scale-110 transition-transform origin-left"><i
+                            class="fa-solid fa-photo-film"></i></div>
+                    <h4 class="text-xl font-bold text-uobNavy mb-3">Visual Storytelling</h4>
+                    <p class="text-slate-600 leading-relaxed">Untapped potential in utilizing the "UoB Visual" and
+                        "Golden Moments" galleries for high-converting social media video marketing.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 fade-in-section group hover:border-uobGold/50 transition-colors"
+                    style="transition-delay: 200ms;">
+                    <div class="text-uobGold text-3xl mb-4 group-hover:scale-110 transition-transform origin-left"><i
+                            class="fa-solid fa-location-dot"></i></div>
+                    <h4 class="text-xl font-bold text-uobNavy mb-3">Local Search Visibility</h4>
+                    <p class="text-slate-600 leading-relaxed">Strengthening Local SEO to capture high-intent prospective
+                        students searching within the broader Brahmanbaria region.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Expanded Marketing & Business Development Plan -->
+    <section class="py-24 bg-uobNavy text-white relative overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-96 h-96 bg-uobGold/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Proposed Marketing Strategies</h2>
+                <div class="w-24 h-1 bg-uobGold mx-auto rounded"></div>
+                <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">A comprehensive 6-pillar strategy designed to
+                    elevate enrollment rates, brand presence, and academic prestige.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Strategy 1 -->
+                <div
+                    class="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:shadow-2xl hover:shadow-uobGold/10 fade-in-section">
+                    <div
+                        class="w-12 h-12 mb-6 rounded-xl bg-gradient-to-br from-uobGold to-yellow-600 flex items-center justify-center text-xl font-bold shadow-lg">
+                        1</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Targeted Lead Generation</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Deploy data-driven Meta ad campaigns focusing
+                        specifically on the <span class="text-uobGold font-medium">"Spring-2026 Admission Fair"</span>
+                        and financial aid facilities.</p>
+                </div>
+                <!-- Strategy 2 -->
+                <div class="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:shadow-2xl hover:shadow-uobGold/10 fade-in-section"
+                    style="transition-delay: 100ms;">
+                    <div
+                        class="w-12 h-12 mb-6 rounded-xl bg-gradient-to-br from-uobGold to-yellow-600 flex items-center justify-center text-xl font-bold shadow-lg">
+                        2</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Content & Social Media</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Produce and distribute engaging video content on
+                        Facebook/YouTube showcasing expert faculties, campus life, and club activities.</p>
+                </div>
+                <!-- Strategy 3 -->
+                <div class="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:shadow-2xl hover:shadow-uobGold/10 fade-in-section"
+                    style="transition-delay: 200ms;">
+                    <div
+                        class="w-12 h-12 mb-6 rounded-xl bg-gradient-to-br from-uobGold to-yellow-600 flex items-center justify-center text-xl font-bold shadow-lg">
+                        3</div>
+                    <h3 class="text-xl font-bold text-white mb-3">SEO & Conversion Setup</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Optimize the "Apply Online" portal and execute
+                        Local SEO targeting keywords like <span class="italic">"Best UGC approved university in
+                            Brahmanbaria"</span>.</p>
+                </div>
+                <!-- Strategy 4 -->
+                <div class="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:shadow-2xl hover:shadow-uobGold/10 fade-in-section"
+                    style="transition-delay: 300ms;">
+                    <div
+                        class="w-12 h-12 mb-6 rounded-xl bg-gradient-to-br from-uobGold to-yellow-600 flex items-center justify-center text-xl font-bold shadow-lg">
+                        4</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Alumni Engagement</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Highlight verifiable student success stories and
+                        UoB's corporate social responsibility activities to build trust.</p>
+                </div>
+                <!-- Strategy 5 -->
+                <div class="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:shadow-2xl hover:shadow-uobGold/10 fade-in-section"
+                    style="transition-delay: 400ms;">
+                    <div
+                        class="w-12 h-12 mb-6 rounded-xl bg-gradient-to-br from-uobGold to-yellow-600 flex items-center justify-center text-xl font-bold shadow-lg">
+                        5</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Corporate Partnerships</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Develop a placement cell and collaborate with
+                        local businesses to offer internships, boosting BBA and CSE appeals.</p>
+                </div>
+                <!-- Strategy 6 -->
+                <div class="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:shadow-2xl hover:shadow-uobGold/10 fade-in-section"
+                    style="transition-delay: 500ms;">
+                    <div
+                        class="w-12 h-12 mb-6 rounded-xl bg-gradient-to-br from-uobGold to-yellow-600 flex items-center justify-center text-xl font-bold shadow-lg">
+                        6</div>
+                    <h3 class="text-xl font-bold text-white mb-3">Offline Marketing Outreach</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">Conduct physical workshops, distribute brochures,
+                        and host career counseling in prominent regional colleges.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Detailed Timeline, Execution Plan & Budget Section -->
+    <section class="py-24 bg-slate-900 border-t border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center mb-16 fade-in-section">
+                <div
+                    class="inline-block mb-4 px-4 py-1.5 rounded-full border border-uobGold/30 bg-uobGold/10 text-uobGold text-sm font-semibold tracking-wider uppercase">
+                    Financials & Execution
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Detailed Action Plan & Budget Breakdown</h2>
+                <div class="w-24 h-1 bg-uobGold mx-auto rounded"></div>
+                <p class="mt-6 text-lg text-slate-300 max-w-2xl mx-auto">A transparent, phase-by-phase breakdown of
+                    where and how funds will be allocated, alongside our dedicated team's service charges for end-to-end
+                    execution.</p>
+            </div>
+
+            <div class="space-y-12">
+                <!-- PHASE 1 CARD -->
+                <div
+                    class="bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl relative fade-in-section overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-uobGold"></div>
+                    <div class="flex flex-col lg:flex-row gap-12">
+                        <!-- Left: Plan Details -->
+                        <div class="lg:w-7/12">
+                            <span class="text-uobGold font-extrabold uppercase tracking-widest text-sm mb-2 block">Phase
+                                1: Months 1 - 3</span>
+                            <h3 class="text-3xl font-bold text-white mb-6">Foundation, Setup & Initial SMM</h3>
+
+                            <h4 class="text-lg font-semibold text-slate-200 mb-3 border-b border-white/10 pb-2">Detailed
+                                Action Items:</h4>
+                            <ul class="space-y-4 text-slate-300 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-hashtag text-uobGold mt-1 mr-3"></i>
+                                    <div><strong>Social Media Marketing (SMM):</strong> Page optimization, setting up a
+                                        consistent content calendar (3 posts/week), and establishing brand tone on
+                                        Facebook & Instagram.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-code text-uobGold mt-1 mr-3"></i>
+                                    <div><strong>Tracking & Tech Setup:</strong> Implementation of Meta Pixel,
+                                        Conversion API, and Google Analytics to ensure precise tracking of future leads.
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-bullhorn text-uobGold mt-1 mr-3"></i>
+                                    <div><strong>Facebook Paid Campaign (Warm-up):</strong> Running low-budget Brand
+                                        Awareness and Page Like campaigns targeted strictly at college students in
+                                        Brahmanbaria.</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Right: Budget Breakdown -->
+                        <div class="lg:w-5/12 bg-[#0d1425] p-8 rounded-2xl border border-white/5">
+                            <h4 class="text-lg font-bold text-white mb-4 flex items-center"><i
+                                    class="fa-solid fa-wallet text-uobGold mr-2"></i> Phase 1 Estimated Budget</h4>
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span>FB Ad Spend (Brand Awareness)</span>
+                                    <span class="font-medium text-white">৳ 20,000</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span>Graphic Design & Content Creation</span>
+                                    <span class="font-medium text-white">৳ 15,000</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span>SEO & Tech Setup Cost</span>
+                                    <span class="font-medium text-white">৳ 10,000</span>
+                                </div>
+                                <div class="flex justify-between pb-2 bg-uobGold/10 p-2 rounded mt-2">
+                                    <span class="font-semibold text-uobGold">Our Team Service Charge</span>
+                                    <span class="font-bold text-uobGold">৳ 45,000</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-white/20 flex justify-between items-center">
+                                <span class="text-slate-400 text-xs uppercase font-bold">Total Estimated</span>
+                                <span class="text-2xl font-black text-white">৳ 90,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 2 CARD -->
+                <div
+                    class="bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl relative fade-in-section overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-yellow-500 to-amber-600"></div>
+                    <div class="flex flex-col lg:flex-row gap-12">
+                        <!-- Left: Plan Details -->
+                        <div class="lg:w-7/12">
+                            <span
+                                class="text-amber-500 font-extrabold uppercase tracking-widest text-sm mb-2 block">Phase
+                                2: Months 4 - 6 (High Season)</span>
+                            <h3 class="text-3xl font-bold text-white mb-6">Aggressive Lead Generation & Outreach</h3>
+
+                            <h4 class="text-lg font-semibold text-slate-200 mb-3 border-b border-white/10 pb-2">Detailed
+                                Action Items:</h4>
+                            <ul class="space-y-4 text-slate-300 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-sack-dollar text-uobGold mt-1 mr-3"></i>
+                                    <div><strong>Facebook Paid Campaign (Lead Gen):</strong> High-budget, highly
+                                        targeted ad campaigns for "Spring-2026 Admission". Using Lead Forms to collect
+                                        student phone numbers and emails directly from FB/IG.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-users text-uobGold mt-1 mr-3"></i>
+                                    <div><strong>Offline Marketing:</strong> Distributing beautifully designed
+                                        brochures/leaflets. Organizing physically branded workshops and career
+                                        counseling sessions in prominent colleges around the region.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-video text-uobGold mt-1 mr-3"></i>
+                                    <div><strong>Visual Production:</strong> Professional videography of campus
+                                        facilities, moot court, and student testimonials to be used as high-converting
+                                        ad creatives.</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Right: Budget Breakdown -->
+                        <div class="lg:w-5/12 bg-[#0d1425] p-8 rounded-2xl border border-white/5">
+                            <h4 class="text-lg font-bold text-white mb-4 flex items-center"><i
+                                    class="fa-solid fa-wallet text-amber-500 mr-2"></i> Phase 2 Estimated Budget</h4>
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span>FB Ad Spend (Lead Generation)</span>
+                                    <span class="font-medium text-white">৳ 80,000</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span>Offline Marketing (Print & Event Cost)</span>
+                                    <span class="font-medium text-white">৳ 30,000</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span>Promo Video Production</span>
+                                    <span class="font-medium text-white">৳ 25,000</span>
+                                </div>
+                                <div class="flex justify-between pb-2 bg-amber-500/10 p-2 rounded mt-2">
+                                    <span class="font-semibold text-amber-500">Our Team Service Charge</span>
+                                    <span class="font-bold text-amber-500">৳ 60,000</span>
+                                </div>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-white/20 flex justify-between items-center">
+                                <span class="text-slate-400 text-xs uppercase font-bold">Total Estimated</span>
+                                <span class="text-2xl font-black text-white">৳ 1,95,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHASE 3 CARD -->
+                <div
+                    class="bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl relative fade-in-section overflow-hidden group">
+                    <div class="absolute top-0 left-0 w-2 h-full bg-blue-500"></div>
+                    <div class="flex flex-col lg:flex-row gap-12">
+                        <!-- Left: Plan Details -->
+                        <div class="lg:w-7/12">
+                            <span
+                                class="text-blue-400 font-extrabold uppercase tracking-widest text-sm mb-2 block">Phase
+                                3: Months 6 - 12</span>
+                            <h3 class="text-3xl font-bold text-white mb-6">Maturity, Retargeting & Brand Trust</h3>
+
+                            <h4 class="text-lg font-semibold text-slate-200 mb-3 border-b border-white/10 pb-2">Detailed
+                                Action Items:</h4>
+                            <ul class="space-y-4 text-slate-300 text-sm">
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-bullseye text-blue-400 mt-1 mr-3"></i>
+                                    <div><strong>Ad Retargeting:</strong> Showing follow-up ads to people who engaged
+                                        with Phase 2 ads but didn't apply. Creating urgency around admission deadlines.
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-briefcase text-blue-400 mt-1 mr-3"></i>
+                                    <div><strong>Corporate & Alumni PR:</strong> Publishing articles and social proof
+                                        highlighting alumni placements to build institutional trust.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fa-solid fa-chart-pie text-blue-400 mt-1 mr-3"></i>
+                                    <div><strong>Maintenance & Analytics:</strong> Continuous A/B testing of social
+                                        media content and SEO fine-tuning to maintain Local Search dominance.</div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Right: Budget Breakdown -->
+                        <div class="lg:w-5/12 bg-[#0d1425] p-8 rounded-2xl border border-white/5">
+                            <h4 class="text-lg font-bold text-white mb-4 flex items-center"><i
+                                    class="fa-solid fa-wallet text-blue-400 mr-2"></i> Phase 3 Estimated Budget</h4>
+                            <div class="space-y-3 text-sm text-slate-300">
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span>FB/Google Ad Spend (Retargeting)</span>
+                                    <span class="font-medium text-white">৳ 50,000</span>
+                                </div>
+                                <div class="flex justify-between border-b border-white/10 pb-2">
+                                    <span>PR & Content Maintenance</span>
+                                    <span class="font-medium text-white">৳ 20,000</span>
+                                </div>
+                                <div class="flex justify-between pb-2 bg-blue-500/10 p-2 rounded mt-2">
+                                    <span class="font-semibold text-blue-400">Our Team Service Charge</span>
+                                    <span class="font-bold text-blue-400">৳ 80,000</span>
+                                </div>
+                                <div class="text-xs text-slate-500 mt-1">*Service charge spans over 6 months of active
+                                    management.</div>
+                            </div>
+                            <div class="mt-6 pt-4 border-t border-white/20 flex justify-between items-center">
+                                <span class="text-slate-400 text-xs uppercase font-bold">Total Estimated</span>
+                                <span class="text-2xl font-black text-white">৳ 1,50,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overall ROI Metrics -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
+                <!-- Result 1 -->
+                <div class="text-center p-6 bg-white/5 rounded-2xl border border-white/10 fade-in-section">
+                    <h4 class="text-4xl font-extrabold text-white mb-2">40<span class="text-uobGold">%</span></h4>
+                    <h5 class="text-sm font-bold text-slate-300 uppercase tracking-wide">Admission Boost</h5>
+                </div>
+                <!-- Result 2 -->
+                <div class="text-center p-6 bg-white/5 rounded-2xl border border-white/10 fade-in-section"
+                    style="transition-delay: 100ms;">
+                    <h4 class="text-4xl font-extrabold text-white mb-2">Top 3</h4>
+                    <h5 class="text-sm font-bold text-slate-300 uppercase tracking-wide">Local SEO Rank</h5>
+                </div>
+                <!-- Result 3 -->
+                <div class="text-center p-6 bg-white/5 rounded-2xl border border-white/10 fade-in-section"
+                    style="transition-delay: 200ms;">
+                    <h4 class="text-4xl font-extrabold text-white mb-2">3x</h4>
+                    <h5 class="text-sm font-bold text-slate-300 uppercase tracking-wide">Social Reach</h5>
+                </div>
+                <!-- Result 4 -->
+                <div class="text-center p-6 bg-white/5 rounded-2xl border border-white/10 fade-in-section"
+                    style="transition-delay: 300ms;">
+                    <h4 class="text-4xl font-extrabold text-white mb-2">100<span class="text-uobGold">%</span></h4>
+                    <h5 class="text-sm font-bold text-slate-300 uppercase tracking-wide">Brand Trust Growth</h5>
+                </div>
+            </div>
+
+            <!-- Action Banner -->
+            <div
+                class="mt-16 bg-gradient-to-r from-uobGold to-yellow-500 rounded-3xl p-8 text-center sm:flex sm:items-center sm:justify-between sm:text-left shadow-lg fade-in-section">
+                <div class="mb-6 sm:mb-0">
+                    <h3 class="text-2xl font-bold text-uobNavy mb-2">Ready to authorize the execution?</h3>
+                    <p class="text-slate-800 font-medium">Let our team handle the end-to-end implementation for
+                        guaranteed growth.</p>
+                </div>
+                <button
+                    class="bg-uobNavy hover:bg-slate-800 text-white font-bold py-4 px-10 rounded-full transition-all duration-300 whitespace-nowrap shadow-[0_4px_15px_rgba(15,23,42,0.4)]">
+                    Approve Budget & Start
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Footer -->
+    <footer class="bg-[#050810] pt-16 pb-8 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center fade-in-section">
+            <div
+                class="w-16 h-16 mx-auto bg-uobGold/20 text-uobGold rounded-full flex items-center justify-center text-2xl mb-6">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <h5 class="text-xl font-bold text-white mb-2">University of Brahmanbaria (UoB)</h5>
+            <p class="text-uobGold font-medium tracking-wide text-sm uppercase mb-8">Comprehensive Digital & Offline
+                Marketing Strategy</p>
+            <div class="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8"></div>
+            <p class="text-slate-500 text-sm">
+                &copy;
+                <script>document.write(new Date().getFullYear())</script> Business Strategy Plan. Executed by the
+                Official Agency Team.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Scroll Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in-section').forEach((section) => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+
+</html>
