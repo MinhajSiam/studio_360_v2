@@ -377,17 +377,18 @@
     </div>
 
     <script>
+        // আপনার Apps Script এর Web App URL টি এখানে দিন
+        const SCRIPT_URL = 'আপনার_WEB_APP_URL_এখানে_দিন';
+
         // Multiple File Upload with Image Preview
         function handleMultipleFileUpload(inputId, containerId) {
             document.getElementById(inputId).addEventListener('change', function (e) {
                 const container = document.getElementById(containerId);
                 container.innerHTML = '';
-
                 const files = e.target.files;
                 if (files.length > 0) {
                     Array.from(files).forEach(file => {
                         if (!file.type.startsWith('image/')) return;
-
                         const reader = new FileReader();
                         reader.onload = function (event) {
                             const img = document.createElement('img');
@@ -404,29 +405,88 @@
         handleMultipleFileUpload('casualPhoto', 'casualPreviewContainer');
         handleMultipleFileUpload('portfolioPhoto', 'portfolioPreviewContainer');
 
-        // Form submission animation
-        document.getElementById('modelRegistrationForm').addEventListener('submit', function (e) {
+        // ফাইল Base64 এ কনভার্ট করার হেল্পার ফাংশন
+        const getBase64 = (file) => new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve({
+                name: file.name,
+                mimeType: file.type,
+                data: reader.result.split(',')[1] // Base64 স্ট্রিং আলাদা করা
+            });
+            reader.onerror = error => reject(error);
+        });
+
+        // Form submission & Google Sheets Integration
+        document.getElementById('modelRegistrationForm').addEventListener('submit', async function (e) {
             e.preventDefault();
+            const form = this;
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const successMsg = document.getElementById('successMessage');
 
             // Button loading state
             const originalText = submitBtn.innerHTML;
             submitBtn.innerHTML = `<svg class="animate-spin h-6 w-6 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> প্রসেসিং...`;
+            submitBtn.disabled = true;
 
-            // Simulate network request
-            setTimeout(() => {
+            try {
+                // ইনপুট ডেটা সংগ্রহ করা (আপনার HTML এর ইনপুট ফিল্ডের সিরিয়াল অনুযায়ী)
+                const inputs = form.querySelectorAll('input[type="text"], input[type="number"], input[type="tel"]');
+                const experienceRadio = form.querySelector('input[name="experience"]:checked');
+
+                // ছবিগুলো প্রসেস করা
+                const casualFiles = document.getElementById('casualPhoto').files;
+                const portfolioFiles = document.getElementById('portfolioPhoto').files;
+
+                const casualPhotosData = await Promise.all(Array.from(casualFiles).map(file => getBase64(file)));
+                const portfolioPhotosData = await Promise.all(Array.from(portfolioFiles).map(file => getBase64(file)));
+
+                // চূড়ান্ত পে-লোড তৈরি
+                const requestData = {
+                    name: inputs[0].value,
+                    age: inputs[1].value,
+                    phone: inputs[2].value,
+                    address: inputs[3].value,
+                    reference: inputs[4].value,
+                    height: inputs[5].value,
+                    hair: inputs[6].value,
+                    experience: experienceRadio ? experienceRadio.value : '',
+                    instaLink: inputs[7].value,
+                    fbLink: inputs[8].value,
+                    driveLink: inputs[9].value,
+                    casualPhotos: casualPhotosData,
+                    portfolioPhotos: portfolioPhotosData
+                };
+
+                // Google Apps Script এ POST Request পাঠানো
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(requestData),
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                });
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    successMsg.classList.remove('hidden');
+
+                    setTimeout(() => {
+                        form.reset();
+                        document.getElementById('casualPreviewContainer').innerHTML = '';
+                        document.getElementById('portfolioPreviewContainer').innerHTML = '';
+                        successMsg.classList.add('hidden');
+                    }, 4000);
+                } else {
+                    alert('দুঃখিত, কোনো একটি সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+                }
+
+            } catch (error) {
+                alert('নেটওয়ার্কে সমস্যা! দয়া করে ইন্টারনেট কানেকশন চেক করুন।');
+                console.error(error);
+            } finally {
                 submitBtn.innerHTML = originalText;
-                successMsg.classList.remove('hidden');
-
-                // Form reset after showing message
-                setTimeout(() => {
-                    this.reset();
-                    document.getElementById('casualPreviewContainer').innerHTML = '';
-                    document.getElementById('portfolioPreviewContainer').innerHTML = '';
-                    successMsg.classList.add('hidden');
-                }, 4000);
-            }, 1500);
+                submitBtn.disabled = false;
+            }
         });
     </script>
 </body>
