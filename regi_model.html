@@ -315,7 +315,7 @@
 
                     <div class="relative group cursor-pointer">
                         <input type="file" id="casualPhoto" accept="image/*" multiple
-                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required>
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
                         <div
                             class="h-full border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center group-hover:border-red-500 group-hover:bg-red-50 transition-all duration-300 bg-gray-50 flex flex-col justify-center">
                             <div
@@ -337,7 +337,7 @@
 
                     <div class="relative group cursor-pointer">
                         <input type="file" id="portfolioPhoto" accept="image/*" multiple
-                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required>
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
                         <div
                             class="h-full border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center group-hover:border-red-500 group-hover:bg-red-50 transition-all duration-300 bg-gray-50 flex flex-col justify-center">
                             <div
@@ -378,7 +378,7 @@
 
     <script>
         // আপনার Apps Script এর Web App URL টি এখানে দিন
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdFUdJkBRf8bp7FCOxRqygc37Dy1naF3fypTVKY3Qk05WyZvHVYdSzadc6MyGk46M/exec';
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRX-iDdZI8N1mC9uqO0WIGTF6NURSnyq8Rc2efJTSah8WbCwJ1JemTdbehlJh4UVoM/exec';
 
         // Multiple File Upload with Image Preview
         function handleMultipleFileUpload(inputId, containerId) {
@@ -477,7 +477,7 @@
                         successMsg.classList.add('hidden');
                     }, 4000);
                 } else {
-                    alert('দুঃখিত, কোনো একটি সমস্যা হয়েছে। আবার চেষ্টা করুন।');
+                    alert('Error: ' + result.message);
                 }
 
             } catch (error) {
