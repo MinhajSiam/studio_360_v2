@@ -1,6 +1,6 @@
 <?php
 session_start();
-$admin_password = 'Studio360Admin@2025'; // আপনার পাসওয়ার্ড
+$admin_password = 'Studio@360'; // আপনার পাসওয়ার্ড
 
 if (isset($_GET['logout'])) {
     session_destroy();
