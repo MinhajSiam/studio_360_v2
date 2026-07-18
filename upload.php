@@ -1,14 +1,11 @@
 <?php
 header('Content-Type: application/json');
-require 'config.php'; // ডাটাবেস কানেকশন যুক্ত করা হলো
+require 'config.php';
 
 $baseDir = 'uploads/';
-if (!file_exists($baseDir)) {
-    mkdir($baseDir, 0777, true);
-}
+if (!file_exists($baseDir)) mkdir($baseDir, 0777, true);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // ফোল্ডারের নাম তৈরি
     $name = preg_replace('/[^a-zA-Z0-9\s]/', '', $_POST['name'] ?? 'Unknown');
     $phone = preg_replace('/[^0-9]/', '', $_POST['phone'] ?? '000');
     $folderName = trim($name) . '_' . $phone . '_' . time();
@@ -18,12 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mkdir($targetDir, 0777, true);
 
     try {
-        // MySQL Database এ ডেটা সেভ করা (Prepared Statement for Security)
-        $stmt = $pdo->prepare("INSERT INTO registered_models (folder_name, name, age, phone, address, reference, height, hair, experience, insta_link, fb_link, drive_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        // Gender সহ ডেটা সেভ করা
+        $stmt = $pdo->prepare("INSERT INTO registered_models (folder_name, name, gender, age, phone, address, reference, height, hair, experience, insta_link, fb_link, drive_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         
         $stmt->execute([
             $folderName,
             $_POST['name'] ?? '',
+            $_POST['gender'] ?? '',
             $_POST['age'] ?? '',
             $_POST['phone'] ?? '',
             $_POST['address'] ?? '',
@@ -36,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['driveLink'] ?? ''
         ]);
 
-        // ছবি আপলোড করার ফাংশন
         function uploadFiles($fileInputName, $prefix, $targetDir) {
             if (isset($_FILES[$fileInputName])) {
                 $total = count($_FILES[$fileInputName]['name']);

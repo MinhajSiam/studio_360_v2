@@ -1,399 +1,174 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Model Registration | Studio360</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { studio: '#ef4444', darkbg: '#0a0a0a' } } } }</script>
     <style>
-        /* Custom Font */
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f8fafc;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #ef4444;
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: #b91c1c;
-        }
-
-        /* Custom Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-in-up {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
-        }
-
-        /* Staggered delays for sections */
-        .delay-100 {
-            animation-delay: 0.1s;
-        }
-
-        .delay-200 {
-            animation-delay: 0.2s;
-        }
-
-        .delay-300 {
-            animation-delay: 0.3s;
-        }
-
-        .delay-400 {
-            animation-delay: 0.4s;
-        }
-
-        .delay-500 {
-            animation-delay: 0.5s;
-        }
-
-        /* Input Focus Float Effect */
-        .input-group:focus-within {
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
-        }
-
-        /* Gradient Button Hover */
-        .btn-gradient {
-            background-size: 200% auto;
-            transition: 0.5s;
-        }
-
-        .btn-gradient:hover {
-            background-position: right center;
-        }
-
-        /* Image Preview Custom Styles */
-        .image-preview-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
-            gap: 8px;
-            margin-top: 16px;
-            position: relative;
-            z-index: 20;
-        }
-
-        .preview-item {
-            width: 100%;
-            aspect-ratio: 1;
-            border-radius: 8px;
-            object-fit: cover;
-            border: 2px solid #fca5a5;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            animation: fadeInScale 0.3s ease-out forwards;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
+        body { background-color: #0a0a0a; color: #e5e5e5; overflow-x: hidden; }
+        .glass-container { background: rgba(20, 20, 20, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); }
+        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #0a0a0a; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; } ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+        .input-icon-wrapper input:focus + i { color: #ef4444; }
+        .image-preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 8px; margin-top: 16px; position: relative; z-index: 20; }
+        .preview-item { width: 100%; aspect-ratio: 1; border-radius: 8px; object-fit: cover; border: 1px solid #ef4444; animation: fadeInScale 0.3s ease-out forwards; }
+        @keyframes fadeInScale { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
     </style>
 </head>
-
-<body
-    class="bg-gradient-to-br from-gray-100 to-gray-200 min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center text-gray-800">
-
-    <div
-        class="max-w-4xl w-full bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-white/50 animate-fade-in-up backdrop-blur-sm">
-
-        <div class="bg-white py-10 px-8 md:px-12 relative overflow-hidden border-b border-gray-100">
-            <div
-                class="absolute top-0 right-0 w-72 h-72 bg-red-50 rounded-full blur-3xl opacity-60 transform translate-x-1/3 -translate-y-1/3">
-            </div>
-
+<body class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative">
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-red-800/10 rounded-full blur-[100px] pointer-events-none"></div>
+    
+    <div class="max-w-4xl w-full glass-container rounded-[2rem] overflow-hidden relative z-10 animate-[fadeInUp_0.8s_ease-out]">
+        <div class="py-10 px-8 md:px-12 relative overflow-hidden border-b border-gray-800/50">
             <div class="flex flex-col md:flex-row items-center justify-between relative z-10">
                 <div class="flex items-center space-x-5">
-                    <div
-                        class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-2xl flex items-center justify-center shadow-lg shadow-red-600/30 transform -rotate-3 transition-transform duration-300 hover:rotate-0">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
-                            </path>
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        </svg>
-                    </div>
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-900 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.3)] transform -rotate-3 hover:rotate-0 transition-all duration-300"><i class="fa-solid fa-camera-retro text-2xl text-white"></i></div>
                     <div class="text-center md:text-left">
-                        <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight uppercase">
-                            Studio<span class="text-red-600">360</span>
-                        </h1>
-                        <p class="text-[10px] sm:text-xs font-bold text-gray-400 tracking-[0.25em] uppercase mt-1">
-                            Professional Talent Hunt</p>
+                        <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight uppercase">Studio<span class="text-studio">360</span></h1>
+                        <p class="text-[10px] sm:text-xs font-bold text-gray-500 tracking-[0.25em] uppercase mt-1">Professional Talent Hunt</p>
                     </div>
                 </div>
-
                 <div class="mt-6 md:mt-0 flex flex-col items-center md:items-end">
-                    <div
-                        class="inline-flex items-center px-5 py-2.5 bg-red-50 rounded-full border border-red-100 shadow-sm">
-                        <span class="relative flex h-3 w-3 mr-3">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-600"></span>
-                        </span>
-                        <span class="text-sm font-bold text-red-700 tracking-wide">মডেল রেজিস্ট্রেশন পোর্টাল</span>
+                    <div class="inline-flex items-center px-4 py-2 bg-red-500/10 rounded-full border border-red-500/20">
+                        <span class="relative flex h-2.5 w-2.5 mr-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span></span>
+                        <span class="text-xs font-bold text-red-400 tracking-wide uppercase">Registration Portal</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <form id="modelRegistrationForm" class="py-10 px-8 md:px-12 space-y-10 bg-white">
-
-            <div class="animate-fade-in-up delay-100">
+        <form id="modelRegistrationForm" class="py-10 px-8 md:px-12 space-y-12">
+            <!-- Section 1 -->
+            <div>
                 <div class="flex items-center mb-6">
-                    <span class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                        </svg>
-                    </span>
-                    <h2 class="text-2xl font-bold text-gray-800">ব্যক্তিগত তথ্য</h2>
+                    <div class="w-8 h-8 rounded-lg bg-red-500/10 text-studio flex items-center justify-center mr-3 border border-red-500/20"><i class="fa-regular fa-id-card"></i></div>
+                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">ব্যক্তিগত তথ্য</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">পূর্ণ নাম <span
-                                class="text-red-500">*</span></label>
-                        <input type="text" required
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
-                            placeholder="আপনার নাম লিখুন">
+                    <div class="relative input-icon-wrapper">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">পূর্ণ নাম <span class="text-studio">*</span></label>
+                        <div class="relative"><i class="fa-regular fa-user absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="text" required class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600" placeholder="আপনার নাম লিখুন"></div>
                     </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">বয়স <span
-                                class="text-red-500">*</span></label>
-                        <input type="number" required
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
-                            placeholder="আপনার বয়স লিখুন">
-                    </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">যোগাযোগের নম্বর (WhatsApp) <span
-                                class="text-red-500">*</span></label>
-                        <input type="tel" required
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
-                            placeholder="01XXX-XXXXXX">
-                    </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">বর্তমান ঠিকানা <span
-                                class="text-red-500">*</span></label>
-                        <input type="text" required
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
-                            placeholder="আপনার বর্তমান ঠিকানা">
-                    </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">রেফারেন্স (যদি থাকে)</label>
-                        <input type="text"
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
-                            placeholder="আপনার রেফারেন্স">
-                    </div>
-                </div>
-            </div>
-
-            <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8"></div>
-
-            <div class="animate-fade-in-up delay-200">
-                <div class="flex items-center mb-6">
-                    <span class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
-                            </path>
-                        </svg>
-                    </span>
-                    <h2 class="text-2xl font-bold text-gray-800">শারীরিক মাপ</h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">উচ্চতা <span
-                                class="text-red-500">*</span></label>
-                        <input type="text" required
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
-                            placeholder="X ফুট X ইঞ্চি">
-                    </div>
-
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">চুলের ধরন <span
-                                class="text-red-500">*</span></label>
-                        <input type="text" required
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm">
-                    </div>
-                </div>
-            </div>
-
-            <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8"></div>
-
-            <div class="animate-fade-in-up delay-300">
-                <div class="flex items-center mb-6">
-                    <span class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                            </path>
-                        </svg>
-                    </span>
-                    <h2 class="text-2xl font-bold text-gray-800">পেশাগত তথ্য</h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-3">পূর্ব অভিজ্ঞতা আছে কি? <span
-                                class="text-red-500">*</span></label>
-                        <div class="flex space-x-6 bg-gray-50 p-3 rounded-xl border border-gray-200">
-                            <label class="flex items-center cursor-pointer hover:text-red-600 transition-colors">
-                                <input type="radio" name="experience" value="yes"
-                                    class="form-radio h-5 w-5 text-red-600 focus:ring-red-500" required>
-                                <span class="ml-2 font-medium">হ্যাঁ</span>
+                    
+                    <!-- NEW GENDER FIELD -->
+                    <div class="md:col-span-1">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">লিঙ্গ (Gender) <span class="text-studio">*</span></label>
+                        <div class="flex gap-4">
+                            <label class="cursor-pointer flex-1 text-center">
+                                <input type="radio" name="gender" value="Male" class="peer sr-only" required>
+                                <div class="py-3 rounded-xl border border-gray-700/50 bg-black/40 text-gray-400 peer-checked:bg-blue-500/10 peer-checked:text-blue-400 peer-checked:border-blue-500 transition-all font-medium text-sm"><i class="fa-solid fa-mars mr-2"></i>Male</div>
                             </label>
-                            <label class="flex items-center cursor-pointer hover:text-red-600 transition-colors">
-                                <input type="radio" name="experience" value="no"
-                                    class="form-radio h-5 w-5 text-red-600 focus:ring-red-500" required>
-                                <span class="ml-2 font-medium">না (নতুন)</span>
+                            <label class="cursor-pointer flex-1 text-center">
+                                <input type="radio" name="gender" value="Female" class="peer sr-only" required>
+                                <div class="py-3 rounded-xl border border-gray-700/50 bg-black/40 text-gray-400 peer-checked:bg-pink-500/10 peer-checked:text-pink-400 peer-checked:border-pink-500 transition-all font-medium text-sm"><i class="fa-solid fa-venus mr-2"></i>Female</div>
                             </label>
                         </div>
                     </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">Instagram Link</label>
-                        <input type="text"
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm">
+
+                    <div class="relative input-icon-wrapper">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">বয়স <span class="text-studio">*</span></label>
+                        <div class="relative"><i class="fa-solid fa-cake-candles absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="number" required class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600" placeholder="আপনার বয়স"></div>
                     </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">Facebook Link</label>
-                        <input type="text"
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm">
+                    <div class="relative input-icon-wrapper">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">WhatsApp Number <span class="text-studio">*</span></label>
+                        <div class="relative"><i class="fa-brands fa-whatsapp absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="tel" required class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600" placeholder="01XXX-XXXXXX"></div>
                     </div>
-                    <div class="input-group">
-                        <label class="block text-sm font-semibold text-gray-600 mb-2">Portfolio Link (if
-                            applicable)</label>
-                        <input type="text"
-                            class="w-full px-5 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-red-500 transition-all duration-300 shadow-sm"
-                            placeholder="Drive Link">
+                    <div class="relative input-icon-wrapper md:col-span-1">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">বর্তমান ঠিকানা <span class="text-studio">*</span></label>
+                        <div class="relative"><i class="fa-solid fa-location-dot absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="text" required class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600" placeholder="বর্তমান ঠিকানা"></div>
+                    </div>
+                    <div class="relative input-icon-wrapper md:col-span-1">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">রেফারেন্স</label>
+                        <div class="relative"><i class="fa-solid fa-user-tag absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="text" class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600" placeholder="রেফারেন্স (যদি থাকে)"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-8"></div>
+            <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
 
-            <div class="animate-fade-in-up delay-400">
+            <!-- Section 2 -->
+            <div>
                 <div class="flex items-center mb-6">
-                    <span class="bg-red-100 text-red-600 p-2 rounded-lg mr-3">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                            </path>
-                        </svg>
-                    </span>
-                    <h2 class="text-2xl font-bold text-gray-800">ছবি আপলোড</h2>
+                    <div class="w-8 h-8 rounded-lg bg-red-500/10 text-studio flex items-center justify-center mr-3 border border-red-500/20"><i class="fa-solid fa-ruler"></i></div>
+                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">শারীরিক মাপ</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                    <div class="relative group cursor-pointer">
-                        <input type="file" id="casualPhoto" accept="image/*" multiple
-                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                        <div
-                            class="h-full border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center group-hover:border-red-500 group-hover:bg-red-50 transition-all duration-300 bg-gray-50 flex flex-col justify-center">
-                            <div
-                                class="bg-white w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z">
-                                    </path>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-sm font-bold text-gray-700 group-hover:text-red-600 mb-1">সাধারণ ছবি আপলোড
-                                করুন</h3>
-                            <p class="text-xs text-gray-400 font-medium">(একাধিক ছবি সিলেক্ট করতে পারবেন)</p>
-                            <div id="casualPreviewContainer" class="image-preview-grid"></div>
-                        </div>
+                    <div class="relative input-icon-wrapper">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">উচ্চতা <span class="text-studio">*</span></label>
+                        <div class="relative"><i class="fa-solid fa-arrows-up-down absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="text" required class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600" placeholder="যেমন: 5' 6&quot;"></div>
                     </div>
-
-                    <div class="relative group cursor-pointer">
-                        <input type="file" id="portfolioPhoto" accept="image/*" multiple
-                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
-                        <div
-                            class="h-full border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center group-hover:border-red-500 group-hover:bg-red-50 transition-all duration-300 bg-gray-50 flex flex-col justify-center">
-                            <div
-                                class="bg-white w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 shadow-sm group-hover:scale-110 transition-transform duration-300">
-                                <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-sm font-bold text-gray-700 group-hover:text-red-600 mb-1">বেস্ট পোর্টফোলিও
-                                আপলোড</h3>
-                            <p class="text-xs text-gray-400 font-medium">(একাধিক ছবি সিলেক্ট করতে পারবেন)</p>
-                            <div id="portfolioPreviewContainer" class="image-preview-grid"></div>
-                        </div>
+                    <div class="relative input-icon-wrapper">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">চুলের ধরন <span class="text-studio">*</span></label>
+                        <div class="relative"><i class="fa-solid fa-scissors absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="text" required class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600" placeholder="যেমন: Black, Curly"></div>
                     </div>
-
                 </div>
             </div>
 
-            <div class="pt-8 animate-fade-in-up delay-500">
-                <button type="submit"
-                    class="btn-gradient w-full bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white font-bold text-xl py-4 rounded-xl shadow-lg shadow-red-500/30 hover:shadow-red-500/50 focus:outline-none focus:ring-4 focus:ring-red-300 transform active:scale-95">
-                    রেজিস্ট্রেশন সম্পন্ন করুন
-                </button>
+            <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+
+            <!-- Section 3 -->
+            <div>
+                <div class="flex items-center mb-6">
+                    <div class="w-8 h-8 rounded-lg bg-red-500/10 text-studio flex items-center justify-center mr-3 border border-red-500/20"><i class="fa-solid fa-briefcase"></i></div>
+                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">পেশাগত তথ্য</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-gray-400 mb-3 uppercase tracking-wide">পূর্ব অভিজ্ঞতা আছে কি? <span class="text-studio">*</span></label>
+                        <div class="flex gap-4">
+                            <label class="cursor-pointer flex-1 text-center">
+                                <input type="radio" name="experience" value="yes" class="peer sr-only" required>
+                                <div class="py-3 rounded-xl border border-gray-700/50 bg-black/40 text-gray-400 peer-checked:bg-red-500/10 peer-checked:text-studio peer-checked:border-red-500 transition-all font-medium"><i class="fa-solid fa-check mr-2"></i>হ্যাঁ (Yes)</div>
+                            </label>
+                            <label class="cursor-pointer flex-1 text-center">
+                                <input type="radio" name="experience" value="no" class="peer sr-only" required>
+                                <div class="py-3 rounded-xl border border-gray-700/50 bg-black/40 text-gray-400 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-500 transition-all font-medium"><i class="fa-solid fa-xmark mr-2"></i>না (Fresher)</div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="relative input-icon-wrapper"><label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Instagram Link</label><div class="relative"><i class="fa-brands fa-instagram absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="text" class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-pink-500 transition-all placeholder-gray-600" placeholder="Profile Link"></div></div>
+                    <div class="relative input-icon-wrapper"><label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Facebook Link</label><div class="relative"><i class="fa-brands fa-facebook-f absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="text" class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-blue-500 transition-all placeholder-gray-600" placeholder="Profile Link"></div></div>
+                    <div class="relative input-icon-wrapper md:col-span-2"><label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Drive Portfolio Link (Optional)</label><div class="relative"><i class="fa-brands fa-google-drive absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input type="text" class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-green-500 transition-all placeholder-gray-600" placeholder="Google Drive Link"></div></div>
+                </div>
             </div>
 
-            <div id="successMessage"
-                class="hidden mt-6 p-4 bg-green-50 border-l-4 border-green-500 text-green-700 rounded-r-lg shadow-sm flex items-center animate-fade-in-up">
-                <svg class="w-6 h-6 mr-3 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <span class="font-semibold">অভিনন্দন! আপনার রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে।</span>
+            <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+
+            <!-- Section 4 -->
+            <div>
+                <div class="flex items-center mb-6">
+                    <div class="w-8 h-8 rounded-lg bg-red-500/10 text-studio flex items-center justify-center mr-3 border border-red-500/20"><i class="fa-regular fa-images"></i></div>
+                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">ছবি আপলোড</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="relative group cursor-pointer"><input type="file" id="casualPhoto" accept="image/*" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required><div class="h-full border-2 border-dashed border-gray-700/50 rounded-2xl p-8 text-center group-hover:border-studio group-hover:bg-red-500/5 transition-all duration-300 bg-black/40"><div class="bg-gray-800 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-studio transition-all duration-300"><i class="fa-solid fa-camera text-xl text-gray-400 group-hover:text-white"></i></div><h3 class="text-sm font-bold text-gray-300 group-hover:text-studio mb-1">সাধারণ ছবি আপলোড</h3><p class="text-xs text-gray-500">(একাধিক ছবি)</p><div id="casualPreviewContainer" class="image-preview-grid"></div></div></div>
+                    <div class="relative group cursor-pointer"><input type="file" id="portfolioPhoto" accept="image/*" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required><div class="h-full border-2 border-dashed border-gray-700/50 rounded-2xl p-8 text-center group-hover:border-studio group-hover:bg-red-500/5 transition-all duration-300 bg-black/40"><div class="bg-gray-800 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-studio transition-all duration-300"><i class="fa-solid fa-photo-film text-xl text-gray-400 group-hover:text-white"></i></div><h3 class="text-sm font-bold text-gray-300 group-hover:text-studio mb-1">পোর্টফোলিও ছবি আপলোড</h3><p class="text-xs text-gray-500">(একাধিক ছবি)</p><div id="portfolioPreviewContainer" class="image-preview-grid"></div></div></div>
+                </div>
             </div>
 
+            <div class="pt-8">
+                <button type="submit" class="w-full bg-studio text-white font-bold text-xl py-4 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] hover:bg-red-600 focus:outline-none transition-all flex justify-center items-center gap-3 uppercase tracking-wider"><i class="fa-solid fa-paper-plane"></i> রেজিস্ট্রেশন সম্পন্ন করুন</button>
+            </div>
+            <div id="successMessage" class="hidden mt-6 p-5 bg-green-500/10 border border-green-500/30 text-green-400 rounded-xl flex items-center shadow-lg backdrop-blur animate-[fadeInUp_0.5s_ease-out]"><div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-4 shrink-0"><i class="fa-solid fa-check text-xl"></i></div><div><h4 class="font-bold text-lg text-green-400">অভিনন্দন!</h4><p class="text-sm text-green-500/80">আপনার রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে।</p></div></div>
         </form>
     </div>
 
     <script>
-        // আপনার Apps Script এর Web App URL টি এখানে দিন
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxRX-iDdZI8N1mC9uqO0WIGTF6NURSnyq8Rc2efJTSah8WbCwJ1JemTdbehlJh4UVoM/exec';
-
-        // Multiple File Upload with Image Preview
         function handleMultipleFileUpload(inputId, containerId) {
             document.getElementById(inputId).addEventListener('change', function (e) {
                 const container = document.getElementById(containerId);
                 container.innerHTML = '';
-                const files = e.target.files;
-                if (files.length > 0) {
-                    Array.from(files).forEach(file => {
+                if (e.target.files.length > 0) {
+                    Array.from(e.target.files).forEach(file => {
                         if (!file.type.startsWith('image/')) return;
                         const reader = new FileReader();
                         reader.onload = function (event) {
                             const img = document.createElement('img');
-                            img.src = event.target.result;
-                            img.className = 'preview-item';
+                            img.src = event.target.result; img.className = 'preview-item';
                             container.appendChild(img);
                         }
                         reader.readAsDataURL(file);
@@ -401,41 +176,24 @@
                 }
             });
         }
-
         handleMultipleFileUpload('casualPhoto', 'casualPreviewContainer');
         handleMultipleFileUpload('portfolioPhoto', 'portfolioPreviewContainer');
 
-        // ফাইল Base64 এ কনভার্ট করার হেল্পার ফাংশন
-        const getBase64 = (file) => new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve({
-                name: file.name,
-                mimeType: file.type,
-                data: reader.result.split(',')[1] // Base64 স্ট্রিং আলাদা করা
-            });
-            reader.onerror = error => reject(error);
-        });
-
-        // Form submission & cPanel Integration
         document.getElementById('modelRegistrationForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const form = this;
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const successMsg = document.getElementById('successMessage');
-
-            // Button loading state
             const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = `<svg class="animate-spin h-6 w-6 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> প্রসেসিং...`;
+            submitBtn.innerHTML = `<svg class="animate-spin h-6 w-6 text-white inline-block mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> প্রসেসিং...`;
             submitBtn.disabled = true;
 
             try {
-                // FormData ব্যবহার করে সরাসরি ফাইল এবং ডেটা পাঠানো (খুব ফাস্ট)
                 const formData = new FormData();
                 const inputs = form.querySelectorAll('input[type="text"], input[type="number"], input[type="tel"]');
                 const experienceRadio = form.querySelector('input[name="experience"]:checked');
+                const genderRadio = form.querySelector('input[name="gender"]:checked'); // New Gender Select
 
-                // টেক্সট ডেটা যুক্ত করা
                 formData.append('name', inputs[0].value);
                 formData.append('age', inputs[1].value);
                 formData.append('phone', inputs[2].value);
@@ -443,46 +201,34 @@
                 formData.append('reference', inputs[4].value);
                 formData.append('height', inputs[5].value);
                 formData.append('hair', inputs[6].value);
+                
+                formData.append('gender', genderRadio ? genderRadio.value : ''); // Add Gender
                 formData.append('experience', experienceRadio ? experienceRadio.value : '');
+                
                 formData.append('instaLink', inputs[7].value);
                 formData.append('fbLink', inputs[8].value);
                 formData.append('driveLink', inputs[9].value);
 
-                // ছবি যুক্ত করা
                 const casualFiles = document.getElementById('casualPhoto').files;
-                for (let i = 0; i < casualFiles.length; i++) {
-                    formData.append('casualPhotos[]', casualFiles[i]);
-                }
+                for (let i = 0; i < casualFiles.length; i++) formData.append('casualPhotos[]', casualFiles[i]);
 
                 const portfolioFiles = document.getElementById('portfolioPhoto').files;
-                for (let i = 0; i < portfolioFiles.length; i++) {
-                    formData.append('portfolioPhotos[]', portfolioFiles[i]);
-                }
+                for (let i = 0; i < portfolioFiles.length; i++) formData.append('portfolioPhotos[]', portfolioFiles[i]);
 
-                // আপনার cPanel এর upload.php ফাইলে রিকোয়েস্ট পাঠানো
-                const response = await fetch('upload.php', {
-                    method: 'POST',
-                    body: formData
-                });
-
+                const response = await fetch('upload.php', { method: 'POST', body: formData });
                 const result = await response.json();
 
                 if (result.status === "success") {
                     successMsg.classList.remove('hidden');
-
                     setTimeout(() => {
                         form.reset();
                         document.getElementById('casualPreviewContainer').innerHTML = '';
                         document.getElementById('portfolioPreviewContainer').innerHTML = '';
                         successMsg.classList.add('hidden');
                     }, 4000);
-                } else {
-                    alert('দুঃখিত, সমস্যা হয়েছে: ' + result.message);
-                }
-
+                } else { alert('দুঃখিত, সমস্যা হয়েছে: ' + result.message); }
             } catch (error) {
                 alert('নেটওয়ার্কে সমস্যা! দয়া করে ইন্টারনেট কানেকশন চেক করুন।');
-                console.error(error);
             } finally {
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
@@ -490,5 +236,4 @@
         });
     </script>
 </body>
-
 </html>

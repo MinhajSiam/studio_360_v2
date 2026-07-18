@@ -1,25 +1,81 @@
 <?php
+session_start();
+$admin_password = 'Studio360Admin@2025'; // আপনার পাসওয়ার্ড
+
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: models.php");
+    exit;
+}
+
+$error_msg = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['login_password'])) {
+    if ($_POST['login_password'] === $admin_password) {
+        $_SESSION['admin_logged_in'] = true;
+        header("Location: models.php");
+        exit;
+    } else {
+        $error_msg = 'ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।';
+    }
+}
+
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+?>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Studio360</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { studio: '#ef4444' } } } }</script>
+    <style>body { background-color: #0a0a0a; color: #fff; }</style>
+</head>
+<body class="min-h-screen flex items-center justify-center relative px-4">
+    <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-red-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-72 h-72 bg-red-900/20 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="w-full max-w-md bg-black/60 backdrop-blur-xl border border-gray-800 rounded-3xl p-8 relative z-10 shadow-2xl">
+        <div class="text-center mb-8">
+            <div class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-900 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-[0_0_30px_rgba(239,68,68,0.3)]"><i class="fa-solid fa-lock text-2xl text-white"></i></div>
+            <h1 class="text-3xl font-black uppercase tracking-tight">Studio<span class="text-studio">360</span></h1>
+            <p class="text-gray-500 text-sm mt-1 uppercase tracking-widest font-semibold">Secured Access Only</p>
+        </div>
+        <?php if($error_msg): ?>
+            <div class="bg-red-500/10 border border-red-500/30 text-red-500 text-sm font-semibold p-3 rounded-lg text-center mb-6"><i class="fa-solid fa-triangle-exclamation mr-1"></i> <?php echo $error_msg; ?></div>
+        <?php endif; ?>
+        <form method="POST" class="space-y-6">
+            <div>
+                <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Enter Admin Password</label>
+                <div class="relative"><i class="fa-solid fa-key absolute left-4 top-3.5 text-gray-500"></i><input type="password" name="login_password" required class="w-full bg-black/50 border border-gray-700 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio transition-all" placeholder="••••••••"></div>
+            </div>
+            <button type="submit" class="w-full bg-studio hover:bg-red-600 text-white font-bold py-3.5 rounded-xl transition-all shadow-[0_0_20px_rgba(239,68,68,0.3)] hover:shadow-[0_0_30px_rgba(239,68,68,0.5)] flex justify-center items-center gap-2 uppercase tracking-wider"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+        </form>
+    </div>
+</body>
+</html>
+<?php
+    exit;
+}
+
+// ================== DASHBOARD ==================
 require 'config.php';
 $baseDir = 'uploads/';
 
-// --- Handle Delete Request ---
+// --- Delete ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
     $id = $_POST['id'];
-    
-    // ডাটাবেস থেকে ফোল্ডারের নাম বের করা
     $stmt = $pdo->prepare("SELECT folder_name FROM registered_models WHERE id = ?");
     $stmt->execute([$id]);
     $model = $stmt->fetch();
-    
     if($model) {
-        // ফোল্ডার এবং ছবি ডিলিট করা
         $dirPath = $baseDir . $model['folder_name'];
         if (is_dir($dirPath)) {
             $files = glob($dirPath . '/*');
             foreach ($files as $file) { if (is_file($file)) unlink($file); }
             rmdir($dirPath);
         }
-        // ডাটাবেস থেকে ডিলিট করা
         $delStmt = $pdo->prepare("DELETE FROM registered_models WHERE id = ?");
         $delStmt->execute([$id]);
     }
@@ -27,12 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     exit;
 }
 
-// --- Handle Edit Request ---
+// --- Edit ---
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'edit') {
     $id = $_POST['id'];
-    $stmt = $pdo->prepare("UPDATE registered_models SET name=?, age=?, phone=?, address=?, height=?, hair=?, insta_link=?, fb_link=?, drive_link=? WHERE id=?");
+    $stmt = $pdo->prepare("UPDATE registered_models SET name=?, gender=?, age=?, phone=?, address=?, height=?, hair=?, insta_link=?, fb_link=?, drive_link=? WHERE id=?");
     $stmt->execute([
-        $_POST['name'], $_POST['age'], $_POST['phone'], $_POST['address'], 
+        $_POST['name'], $_POST['gender'], $_POST['age'], $_POST['phone'], $_POST['address'], 
         $_POST['height'], $_POST['hair'], $_POST['instaLink'], $_POST['fbLink'], $_POST['driveLink'], $id
     ]);
     header("Location: models.php");
@@ -49,20 +105,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = { theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { studio: '#ef4444', darkbg: '#0a0a0a', panel: '#141414' } } } }
-    </script>
-    
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { studio: '#ef4444', darkbg: '#0a0a0a', panel: '#141414' } } } }</script>
     <style>
         body { background-color: #0a0a0a; color: #fff; }
         .glass-panel { background: rgba(20, 20, 20, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
-        .hide-scroll::-webkit-scrollbar { display: none; }
-        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-track { background: #0a0a0a; } ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; } ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
+        .hide-scroll::-webkit-scrollbar { display: none; } .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="min-h-screen p-4 md:p-8">
@@ -70,14 +118,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     <div class="max-w-[1400px] mx-auto">
         <header class="flex flex-col md:flex-row md:justify-between md:items-end mb-8 border-b border-gray-800 pb-6 gap-4">
             <div>
-                <h1 class="text-3xl md:text-5xl font-black tracking-tight uppercase flex items-center gap-3">
-                    Studio<span class="text-studio">360</span>
-                    <span class="text-gray-600 font-light text-2xl md:text-4xl">| Directory</span>
-                </h1>
+                <h1 class="text-3xl md:text-5xl font-black tracking-tight uppercase flex items-center gap-3">Studio<span class="text-studio">360</span><span class="text-gray-600 font-light text-2xl md:text-4xl">| Directory</span></h1>
             </div>
-            <button onclick="exportToCSV()" class="bg-green-600 hover:bg-green-500 text-white px-6 py-2.5 rounded-lg font-semibold transition-all flex items-center gap-2 shadow-lg shadow-green-900/50">
-                <i class="fa-solid fa-file-excel"></i> Export Excel
-            </button>
+            <div class="flex gap-3">
+                <button onclick="exportToCSV()" class="bg-green-600 hover:bg-green-500 text-white px-5 py-2.5 rounded-lg font-semibold transition-all flex items-center gap-2 shadow-lg shadow-green-900/50 text-sm"><i class="fa-solid fa-file-excel"></i> Export</button>
+                <a href="?logout=true" class="bg-red-500/10 hover:bg-red-500 text-red-500 hover:text-white border border-red-500/20 px-5 py-2.5 rounded-lg font-semibold transition-all flex items-center gap-2 text-sm"><i class="fa-solid fa-power-off"></i> Logout</a>
+            </div>
         </header>
 
         <!-- Search & Filter Bar -->
@@ -86,8 +132,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 <i class="fa-solid fa-search absolute left-4 top-3.5 text-gray-500"></i>
                 <input type="text" id="searchInput" onkeyup="filterModels()" placeholder="Search by name..." class="w-full bg-black/50 border border-gray-700 rounded-lg py-2.5 pl-11 pr-4 text-white focus:outline-none focus:border-studio">
             </div>
-            <div class="w-full md:w-48">
+            <div class="w-full md:w-40">
                 <input type="text" id="locationFilter" onkeyup="filterModels()" placeholder="Filter Location" class="w-full bg-black/50 border border-gray-700 rounded-lg py-2.5 px-4 text-white focus:outline-none focus:border-studio">
+            </div>
+            <div class="w-full md:w-32">
+                <select id="genderFilter" onchange="filterModels()" class="w-full bg-black/50 border border-gray-700 rounded-lg py-2.5 px-4 text-white focus:outline-none focus:border-studio appearance-none">
+                    <option value="">All Genders</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
             </div>
             <div class="w-full md:w-32">
                 <select id="ageFilter" onchange="filterModels()" class="w-full bg-black/50 border border-gray-700 rounded-lg py-2.5 px-4 text-white focus:outline-none focus:border-studio appearance-none">
@@ -100,10 +153,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             </div>
         </div>
         
+        <!-- Cards Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="modelsGrid">
             <?php
             $exportData = [];
-            // MySQL থেকে ডেটা লোড করা (সবচেয়ে নতুনটা আগে)
             $stmt = $pdo->query("SELECT * FROM registered_models ORDER BY id DESC");
             $models = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -114,21 +167,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                     $coverImg = !empty($images) ? $images[0] : 'https://via.placeholder.com/400x500/1a1a1a/ef4444?text=No+Photo';
                     
                     $cleanPhone = preg_replace('/[^0-9]/', '', $d['phone']);
-                    $isPro = (strtolower($d['experience']) == 'yes' || strtolower($d['experience']) == 'হ্যাঁ');
-                    
-                    // Export Array
                     $exportData[] = $d;
 
+                    // Data for filtering
                     $searchName = strtolower($d['name']);
                     $searchLoc = strtolower($d['address']);
                     $ageVal = (int)$d['age'];
+                    $searchGender = strtolower(trim($d['gender'] ?? ''));
+
+                    // JSON Encode fixed for Javascript escaping
+                    $jsonData = htmlspecialchars(json_encode($d), ENT_QUOTES, 'UTF-8');
 
                     echo "
-                    <div class='model-card glass-panel rounded-2xl overflow-hidden group flex flex-col relative' data-name='{$searchName}' data-loc='{$searchLoc}' data-age='{$ageVal}'>
+                    <div class='model-card glass-panel rounded-2xl overflow-hidden group flex flex-col relative' data-name='{$searchName}' data-loc='{$searchLoc}' data-age='{$ageVal}' data-gender='{$searchGender}'>
                         
                         <div class='absolute top-3 right-3 z-20 flex gap-2'>
-                            <button onclick='openEditModal(".json_encode($d).")' class='w-8 h-8 rounded bg-blue-500/80 hover:bg-blue-500 text-white flex items-center justify-center backdrop-blur shadow-lg transition-all'><i class='fa-solid fa-pen text-xs'></i></button>
-                            <form method='POST' onsubmit='return confirm(\"Are you sure?\")' class='m-0'>
+                            <!-- Fixed Button Code -->
+                            <button data-info='{$jsonData}' onclick='openEditModal(this)' class='w-8 h-8 rounded bg-blue-500/80 hover:bg-blue-500 text-white flex items-center justify-center backdrop-blur shadow-lg transition-all'><i class='fa-solid fa-pen text-xs'></i></button>
+                            
+                            <form method='POST' onsubmit='return confirm(\"Are you sure you want to delete this model completely?\")' class='m-0'>
                                 <input type='hidden' name='action' value='delete'>
                                 <input type='hidden' name='id' value='{$d['id']}'>
                                 <button type='submit' class='w-8 h-8 rounded bg-red-600/80 hover:bg-red-600 text-white flex items-center justify-center backdrop-blur shadow-lg transition-all'><i class='fa-solid fa-trash text-xs'></i></button>
@@ -142,6 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                             <div class='absolute bottom-4 left-5 right-5 z-10'>
                                 <h2 class='text-2xl font-bold text-white truncate mb-2'>{$d['name']}</h2>
                                 <div class='flex gap-2 text-xs font-semibold'>
+                                    " . (!empty($d['gender']) ? "<span class='bg-white/10 backdrop-blur border border-white/20 px-2.5 py-1 rounded-md text-gray-200'>".(strtolower($d['gender'])=='male'?"<i class='fa-solid fa-mars text-blue-400 mr-1'></i>":"<i class='fa-solid fa-venus text-pink-400 mr-1'></i>")."{$d['gender']}</span>" : "") . "
                                     " . (!empty($d['age']) ? "<span class='bg-white/10 backdrop-blur border border-white/20 px-2.5 py-1 rounded-md text-gray-200'><i class='fa-regular fa-calendar mr-1'></i>{$d['age']}y</span>" : "") . "
                                     " . (!empty($d['height']) ? "<span class='bg-white/10 backdrop-blur border border-white/20 px-2.5 py-1 rounded-md text-gray-200'><i class='fa-solid fa-ruler-vertical mr-1'></i>{$d['height']}</span>" : "") . "
                                 </div>
@@ -169,14 +227,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
                             <div class='mt-auto'>
                                 <div class='flex justify-between items-end mb-2 border-t border-gray-800 pt-3'>
-                                    <h3 class='text-[10px] text-gray-500 uppercase tracking-widest font-semibold'>Photos</h3>
+                                    <h3 class='text-[10px] text-gray-500 uppercase tracking-widest font-semibold'>Photos Gallery</h3>
                                     <span class='text-xs font-bold text-studio bg-red-500/10 px-2 py-0.5 rounded'>".(is_array($images) ? count($images) : 0)."</span>
                                 </div>
-                                <div class='flex gap-2 overflow-x-auto pb-1 hide-scroll'>";
+                                <div class='flex gap-2 overflow-x-auto pb-1 hide-scroll fancybox-gallery-{$d['id']}'>";
                                 if(is_array($images)) {
                                     foreach($images as $index => $img) {
-                                        echo "<a href='{$img}' data-fancybox='gallery-{$d['id']}' class='flex-shrink-0 cursor-zoom-in'>
-                                                <img src='{$img}' class='h-12 w-12 object-cover rounded-lg border border-gray-800 hover:border-studio transition-all'>
+                                        echo "<a href='{$img}' data-fancybox='gallery-{$d['id']}' class='flex-shrink-0 cursor-zoom-in group/img'>
+                                                <img src='{$img}' class='h-12 w-12 object-cover rounded-lg border border-gray-800 group-hover/img:border-studio opacity-70 hover:opacity-100 transition-all'>
                                               </a>";
                                     }
                                 }
@@ -206,6 +264,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 <input type="hidden" name="id" id="editId">
                 
                 <div><label class="text-xs text-gray-400">Name</label><input type="text" name="name" id="editName" class="w-full bg-black border border-gray-700 rounded p-2 text-white"></div>
+                <div>
+                    <label class="text-xs text-gray-400">Gender</label>
+                    <select name="gender" id="editGender" class="w-full bg-black border border-gray-700 rounded p-2 text-white appearance-none">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
                 <div><label class="text-xs text-gray-400">Age</label><input type="text" name="age" id="editAge" class="w-full bg-black border border-gray-700 rounded p-2 text-white"></div>
                 <div><label class="text-xs text-gray-400">Phone</label><input type="text" name="phone" id="editPhone" class="w-full bg-black border border-gray-700 rounded p-2 text-white"></div>
                 <div><label class="text-xs text-gray-400">Location</label><input type="text" name="address" id="editAddress" class="w-full bg-black border border-gray-700 rounded p-2 text-white"></div>
@@ -231,16 +296,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         function filterModels() {
             let search = document.getElementById('searchInput').value.toLowerCase();
             let locSearch = document.getElementById('locationFilter').value.toLowerCase();
+            let genderFilter = document.getElementById('genderFilter').value.toLowerCase();
             let ageRange = document.getElementById('ageFilter').value;
             let cards = document.querySelectorAll('.model-card');
 
             cards.forEach(card => {
                 let name = card.getAttribute('data-name');
                 let loc = card.getAttribute('data-loc');
+                let gender = card.getAttribute('data-gender');
                 let age = parseInt(card.getAttribute('data-age')) || 0;
                 
                 let matchesSearch = name.includes(search);
                 let matchesLoc = loc.includes(locSearch);
+                let matchesGender = (genderFilter === '' || gender === genderFilter);
                 let matchesAge = true;
 
                 if(ageRange === '0-18') matchesAge = (age > 0 && age <= 18);
@@ -248,7 +316,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
                 if(ageRange === '26-35') matchesAge = (age >= 26 && age <= 35);
                 if(ageRange === '36+') matchesAge = (age >= 36);
 
-                if(matchesSearch && matchesLoc && matchesAge) { card.style.display = 'flex'; } else { card.style.display = 'none'; }
+                if(matchesSearch && matchesLoc && matchesGender && matchesAge) { 
+                    card.style.display = 'flex'; 
+                } else { 
+                    card.style.display = 'none'; 
+                }
             });
         }
 
@@ -275,9 +347,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             document.body.removeChild(link);
         }
 
-        function openEditModal(data) {
+        // Updated Edit Modal Logic
+        function openEditModal(btn) {
+            let data = JSON.parse(btn.getAttribute('data-info'));
+            
             document.getElementById('editId').value = data['id'];
             document.getElementById('editName').value = data['name'] || '';
+            document.getElementById('editGender').value = data['gender'] || 'Male';
             document.getElementById('editAge').value = data['age'] || '';
             document.getElementById('editPhone').value = data['phone'] || '';
             document.getElementById('editAddress').value = data['address'] || '';
@@ -286,6 +362,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             document.getElementById('editInsta').value = data['insta_link'] || '';
             document.getElementById('editFB').value = data['fb_link'] || '';
             document.getElementById('editDrive').value = data['drive_link'] || '';
+            
             document.getElementById('editModal').classList.remove('hidden');
         }
 
