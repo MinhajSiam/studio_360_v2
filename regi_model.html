@@ -417,7 +417,7 @@
             reader.onerror = error => reject(error);
         });
 
-        // Form submission & Google Sheets Integration
+        // Form submission & cPanel Integration
         document.getElementById('modelRegistrationForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             const form = this;
@@ -430,39 +430,39 @@
             submitBtn.disabled = true;
 
             try {
-                // ইনপুট ডেটা সংগ্রহ করা (আপনার HTML এর ইনপুট ফিল্ডের সিরিয়াল অনুযায়ী)
+                // FormData ব্যবহার করে সরাসরি ফাইল এবং ডেটা পাঠানো (খুব ফাস্ট)
+                const formData = new FormData();
                 const inputs = form.querySelectorAll('input[type="text"], input[type="number"], input[type="tel"]');
                 const experienceRadio = form.querySelector('input[name="experience"]:checked');
 
-                // ছবিগুলো প্রসেস করা
+                // টেক্সট ডেটা যুক্ত করা
+                formData.append('name', inputs[0].value);
+                formData.append('age', inputs[1].value);
+                formData.append('phone', inputs[2].value);
+                formData.append('address', inputs[3].value);
+                formData.append('reference', inputs[4].value);
+                formData.append('height', inputs[5].value);
+                formData.append('hair', inputs[6].value);
+                formData.append('experience', experienceRadio ? experienceRadio.value : '');
+                formData.append('instaLink', inputs[7].value);
+                formData.append('fbLink', inputs[8].value);
+                formData.append('driveLink', inputs[9].value);
+
+                // ছবি যুক্ত করা
                 const casualFiles = document.getElementById('casualPhoto').files;
+                for (let i = 0; i < casualFiles.length; i++) {
+                    formData.append('casualPhotos[]', casualFiles[i]);
+                }
+
                 const portfolioFiles = document.getElementById('portfolioPhoto').files;
+                for (let i = 0; i < portfolioFiles.length; i++) {
+                    formData.append('portfolioPhotos[]', portfolioFiles[i]);
+                }
 
-                const casualPhotosData = await Promise.all(Array.from(casualFiles).map(file => getBase64(file)));
-                const portfolioPhotosData = await Promise.all(Array.from(portfolioFiles).map(file => getBase64(file)));
-
-                // চূড়ান্ত পে-লোড তৈরি
-                const requestData = {
-                    name: inputs[0].value,
-                    age: inputs[1].value,
-                    phone: inputs[2].value,
-                    address: inputs[3].value,
-                    reference: inputs[4].value,
-                    height: inputs[5].value,
-                    hair: inputs[6].value,
-                    experience: experienceRadio ? experienceRadio.value : '',
-                    instaLink: inputs[7].value,
-                    fbLink: inputs[8].value,
-                    driveLink: inputs[9].value,
-                    casualPhotos: casualPhotosData,
-                    portfolioPhotos: portfolioPhotosData
-                };
-
-                // Google Apps Script এ POST Request পাঠানো
-                const response = await fetch(SCRIPT_URL, {
+                // আপনার cPanel এর upload.php ফাইলে রিকোয়েস্ট পাঠানো
+                const response = await fetch('upload.php', {
                     method: 'POST',
-                    body: JSON.stringify(requestData),
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+                    body: formData
                 });
 
                 const result = await response.json();
@@ -477,11 +477,11 @@
                         successMsg.classList.add('hidden');
                     }, 4000);
                 } else {
-                    alert('Error: ' + result.message);
+                    alert('দুঃখিত, সমস্যা হয়েছে: ' + result.message);
                 }
 
             } catch (error) {
-                alert('নেটওয়ার্কে সমস্যা! দয়া করে ইন্টারনেট কানেকশন চেক করুন।');
+                alert('নেটওয়ার্কে সমস্যা! দয়া করে ইন্টারনেট কানেকশন চেক করুন।');
                 console.error(error);
             } finally {
                 submitBtn.innerHTML = originalText;
