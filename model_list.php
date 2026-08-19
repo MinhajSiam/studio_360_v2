@@ -118,7 +118,7 @@ $baseDir = 'uploads/';
             $models = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             // আপনার স্টুডিওর হোয়াটসঅ্যাপ নাম্বারটি এখানে দিন (Country code সহ, যেমন: 88017...)
-            $studioWhatsApp = "8801700000000";
+            $studioWhatsApp = "8801632344221";
 
             if (count($models) > 0) {
                 foreach ($models as $d) {
