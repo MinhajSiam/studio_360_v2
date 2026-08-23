@@ -109,28 +109,22 @@
             </div>
         </div>
 
-        <form id="modelRegistrationForm" class="py-10 px-8 md:px-12 space-y-12">
-            <!-- Section 1 -->
+        <form id="modelRegistrationForm" class="py-10 px-8 md:px-12 space-y-8">
+
+            <!-- Section 1 (No Title) -->
             <div>
-                <div class="flex items-center mb-6">
-                    <div
-                        class="w-8 h-8 rounded-lg bg-red-500/10 text-studio flex items-center justify-center mr-3 border border-red-500/20">
-                        <i class="fa-regular fa-id-card"></i>
-                    </div>
-                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">ব্যক্তিগত তথ্য</h2>
-                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="relative input-icon-wrapper">
                         <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">পূর্ণ নাম
                             <span class="text-studio">*</span></label>
                         <div class="relative"><i
                                 class="fa-regular fa-user absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="text" required
+                                type="text" id="modelName" required
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
                                 placeholder="আপনার নাম লিখুন"></div>
                     </div>
 
-                    <!-- NEW GENDER FIELD -->
+                    <!-- GENDER FIELD -->
                     <div class="md:col-span-1">
                         <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">লিঙ্গ
                             (Gender) <span class="text-studio">*</span></label>
@@ -157,34 +151,37 @@
                                 class="text-studio">*</span></label>
                         <div class="relative"><i
                                 class="fa-solid fa-cake-candles absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="number" required
+                                type="number" id="modelAge" required
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
                                 placeholder="আপনার বয়স"></div>
                     </div>
+
                     <div class="relative input-icon-wrapper">
                         <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">WhatsApp
                             Number <span class="text-studio">*</span></label>
                         <div class="relative"><i
                                 class="fa-brands fa-whatsapp absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="tel" required
+                                type="tel" id="modelPhone" required
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
                                 placeholder="01XXX-XXXXXX"></div>
                     </div>
+
                     <div class="relative input-icon-wrapper md:col-span-1">
                         <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">বর্তমান
                             ঠিকানা <span class="text-studio">*</span></label>
                         <div class="relative"><i
                                 class="fa-solid fa-location-dot absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="text" required
+                                type="text" id="modelAddress" required
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
                                 placeholder="বর্তমান ঠিকানা"></div>
                     </div>
+
                     <div class="relative input-icon-wrapper md:col-span-1">
                         <label
                             class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">রেফারেন্স</label>
                         <div class="relative"><i
                                 class="fa-solid fa-user-tag absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="text"
+                                type="text" id="modelRef"
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
                                 placeholder="রেফারেন্স (যদি থাকে)"></div>
                     </div>
@@ -193,48 +190,35 @@
 
             <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
 
-            <!-- Section 2 -->
+            <!-- Section 2 (No Title - Physical Stats) -->
             <div>
-                <div class="flex items-center mb-6">
-                    <div
-                        class="w-8 h-8 rounded-lg bg-red-500/10 text-studio flex items-center justify-center mr-3 border border-red-500/20">
-                        <i class="fa-solid fa-ruler"></i>
-                    </div>
-                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">শারীরিক মাপ</h2>
-                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="relative input-icon-wrapper">
                         <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">উচ্চতা
                             <span class="text-studio">*</span></label>
                         <div class="relative"><i
                                 class="fa-solid fa-arrows-up-down absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="text" required
+                                type="text" id="modelHeight" required
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
                                 placeholder="যেমন: 5' 6&quot;"></div>
                     </div>
                     <div class="relative input-icon-wrapper">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">চুলের ধরন
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">ওজন
+                            (Weight)
                             <span class="text-studio">*</span></label>
                         <div class="relative"><i
-                                class="fa-solid fa-scissors absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="text" required
+                                class="fa-solid fa-weight-scale absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                type="text" id="modelWeight" required
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
-                                placeholder="যেমন: Black, Curly"></div>
+                                placeholder="যেমন: 60 kg"></div>
                     </div>
                 </div>
             </div>
 
             <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
 
-            <!-- Section 3 -->
+            <!-- Section 3 (No Title - Professional & Links) -->
             <div>
-                <div class="flex items-center mb-6">
-                    <div
-                        class="w-8 h-8 rounded-lg bg-red-500/10 text-studio flex items-center justify-center mr-3 border border-red-500/20">
-                        <i class="fa-solid fa-briefcase"></i>
-                    </div>
-                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">পেশাগত তথ্য</h2>
-                </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
                         <label class="block text-xs font-semibold text-gray-400 mb-3 uppercase tracking-wide">পূর্ব
@@ -261,7 +245,7 @@
                             Link</label>
                         <div class="relative"><i
                                 class="fa-brands fa-instagram absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="text"
+                                type="text" id="modelInsta"
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-pink-500 transition-all placeholder-gray-600"
                                 placeholder="Profile Link"></div>
                     </div>
@@ -270,25 +254,64 @@
                             Link</label>
                         <div class="relative"><i
                                 class="fa-brands fa-facebook-f absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="text"
+                                type="text" id="modelFB"
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-blue-500 transition-all placeholder-gray-600"
                                 placeholder="Profile Link"></div>
                     </div>
-                    <div class="relative input-icon-wrapper md:col-span-2"><label
+                    <div class="relative input-icon-wrapper md:col-span-1"><label
                             class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Drive
                             Portfolio Link (Optional)</label>
                         <div class="relative"><i
                                 class="fa-brands fa-google-drive absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
-                                type="text"
+                                type="text" id="modelDrive"
                                 class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-green-500 transition-all placeholder-gray-600"
                                 placeholder="Google Drive Link"></div>
+                    </div>
+                    <div class="relative input-icon-wrapper md:col-span-1"><label
+                            class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">TikTok
+                            Link</label>
+                        <div class="relative"><i
+                                class="fa-brands fa-tiktok absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                type="text" id="modelTikTok"
+                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-[#ff0050] transition-all placeholder-gray-600"
+                                placeholder="TikTok Profile Link"></div>
                     </div>
                 </div>
             </div>
 
             <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
 
-            <!-- Section 4 -->
+            <!-- Section 4 (Expected Remuneration) -->
+            <div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="relative input-icon-wrapper md:col-span-1">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Expected
+                            Remuneration (Whole Day) <span class="text-studio">*</span></label>
+                        <div class="relative">
+                            <i
+                                class="fa-solid fa-money-bill-wave absolute left-4 top-3.5 text-gray-500 transition-colors"></i>
+                            <input type="text" id="remWholeDay" required
+                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-yellow-500 transition-all placeholder-gray-600"
+                                placeholder="যেমন: 10000 BDT">
+                        </div>
+                    </div>
+                    <div class="relative input-icon-wrapper md:col-span-1">
+                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Expected
+                            Remuneration (Per Content) <span class="text-studio">*</span></label>
+                        <div class="relative">
+                            <i
+                                class="fa-solid fa-hand-holding-dollar absolute left-4 top-3.5 text-gray-500 transition-colors"></i>
+                            <input type="text" id="remPerContent" required
+                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-yellow-500 transition-all placeholder-gray-600"
+                                placeholder="যেমন: 2000 BDT">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+
+            <!-- Section 5 (Image Upload) -->
             <div>
                 <div class="flex items-center mb-6">
                     <div
@@ -334,6 +357,7 @@
                     class="w-full bg-studio text-white font-bold text-xl py-4 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] hover:bg-red-600 focus:outline-none transition-all flex justify-center items-center gap-3 uppercase tracking-wider"><i
                         class="fa-solid fa-paper-plane"></i> রেজিস্ট্রেশন সম্পন্ন করুন</button>
             </div>
+
             <div id="successMessage"
                 class="hidden mt-6 p-5 bg-green-500/10 border border-green-500/30 text-green-400 rounded-xl flex items-center shadow-lg backdrop-blur animate-[fadeInUp_0.5s_ease-out]">
                 <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-4 shrink-0"><i
@@ -379,24 +403,29 @@
 
             try {
                 const formData = new FormData();
-                const inputs = form.querySelectorAll('input[type="text"], input[type="number"], input[type="tel"]');
+
+                // Using IDs securely to fetch data instead of relying on NodeList index
+                const genderRadio = form.querySelector('input[name="gender"]:checked');
                 const experienceRadio = form.querySelector('input[name="experience"]:checked');
-                const genderRadio = form.querySelector('input[name="gender"]:checked'); // New Gender Select
 
-                formData.append('name', inputs[0].value);
-                formData.append('age', inputs[1].value);
-                formData.append('phone', inputs[2].value);
-                formData.append('address', inputs[3].value);
-                formData.append('reference', inputs[4].value);
-                formData.append('height', inputs[5].value);
-                formData.append('hair', inputs[6].value);
+                formData.append('name', document.getElementById('modelName').value);
+                formData.append('gender', genderRadio ? genderRadio.value : '');
+                formData.append('age', document.getElementById('modelAge').value);
+                formData.append('phone', document.getElementById('modelPhone').value);
+                formData.append('address', document.getElementById('modelAddress').value);
+                formData.append('reference', document.getElementById('modelRef').value);
 
-                formData.append('gender', genderRadio ? genderRadio.value : ''); // Add Gender
+                formData.append('height', document.getElementById('modelHeight').value);
+                formData.append('weight', document.getElementById('modelWeight').value); // Replaced Hair
+
                 formData.append('experience', experienceRadio ? experienceRadio.value : '');
+                formData.append('instaLink', document.getElementById('modelInsta').value);
+                formData.append('fbLink', document.getElementById('modelFB').value);
+                formData.append('driveLink', document.getElementById('modelDrive').value);
+                formData.append('tiktokLink', document.getElementById('modelTikTok').value); // Added TikTok
 
-                formData.append('instaLink', inputs[7].value);
-                formData.append('fbLink', inputs[8].value);
-                formData.append('driveLink', inputs[9].value);
+                formData.append('remWholeDay', document.getElementById('remWholeDay').value); // Added Remuneration
+                formData.append('remPerContent', document.getElementById('remPerContent').value); // Added Remuneration
 
                 const casualFiles = document.getElementById('casualPhoto').files;
                 for (let i = 0; i < casualFiles.length; i++) formData.append('casualPhotos[]', casualFiles[i]);

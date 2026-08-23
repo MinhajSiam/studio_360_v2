@@ -1,8 +1,8 @@
 <?php
 // আপনার ডাটাবেসের তথ্যগুলো এখানে দিন
-$host = 'localhost'; 
-$dbname = 'innovat2_studio360_models'; 
-$user = 'innovat2_admin'; 
+$host = 'localhost';
+$dbname = 'innovat2_studio360_models';
+$user = 'innovat2_admin';
 $pass = 'MinhajSiam007%';
 
 try {
@@ -34,8 +34,6 @@ try {
     } catch (PDOException $e) {
         // কলাম আগে থেকেই থাকলে এরর ইগনোর করবে
     }
-
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     die("Database Connection Failed: " . $e->getMessage());
 }
-?>
