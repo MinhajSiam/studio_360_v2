@@ -9,19 +9,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
-    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { studio: '#ef4444', darkbg: '#0a0a0a' } } } }</script>
+    <script>tailwind.config = { theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] }, colors: { studio: '#ef4444', lightbg: '#f8fafc' } } } }</script>
     <style>
         body {
-            background-color: #0a0a0a;
-            color: #e5e5e5;
+            background-color: #f8fafc;
+            /* Light Theme Background */
+            color: #1f2937;
+            /* Dark Gray Text */
             overflow-x: hidden;
         }
 
         .glass-container {
-            background: rgba(20, 20, 20, 0.65);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.08);
         }
 
         ::-webkit-scrollbar {
@@ -29,11 +31,11 @@
         }
 
         ::-webkit-scrollbar-track {
-            background: #0a0a0a;
+            background: #f1f1f1;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #333;
+            background: #cbd5e1;
             border-radius: 4px;
         }
 
@@ -78,32 +80,33 @@
 </head>
 
 <body class="min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex items-center justify-center relative">
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-600/20 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-red-800/10 rounded-full blur-[100px] pointer-events-none">
+    <!-- Light Theme Background Blobs -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-red-400/15 rounded-full blur-[100px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-red-500/10 rounded-full blur-[100px] pointer-events-none">
     </div>
 
     <div
         class="max-w-4xl w-full glass-container rounded-[2rem] overflow-hidden relative z-10 animate-[fadeInUp_0.8s_ease-out]">
-        <div class="py-10 px-8 md:px-12 relative overflow-hidden border-b border-gray-800/50">
+        <div class="py-10 px-8 md:px-12 relative overflow-hidden border-b border-gray-200">
             <div class="flex flex-col md:flex-row items-center justify-between relative z-10">
                 <div class="flex items-center space-x-5">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-red-600 to-red-900 rounded-2xl flex items-center justify-center shadow-[0_0_30px_rgba(239,68,68,0.3)] transform -rotate-3 hover:rotate-0 transition-all duration-300">
+                        class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-700 rounded-2xl flex items-center justify-center shadow-[0_10px_20px_rgba(239,68,68,0.25)] transform -rotate-3 hover:rotate-0 transition-all duration-300">
                         <i class="fa-solid fa-camera-retro text-2xl text-white"></i>
                     </div>
                     <div class="text-center md:text-left">
-                        <h1 class="text-4xl md:text-5xl font-black text-white tracking-tight uppercase">Studio<span
+                        <h1 class="text-4xl md:text-5xl font-black text-gray-900 tracking-tight uppercase">Studio<span
                                 class="text-studio">360</span></h1>
                         <p class="text-[10px] sm:text-xs font-bold text-gray-500 tracking-[0.25em] uppercase mt-1">
                             Professional Talent Hunt</p>
                     </div>
                 </div>
                 <div class="mt-6 md:mt-0 flex flex-col items-center md:items-end">
-                    <div class="inline-flex items-center px-4 py-2 bg-red-500/10 rounded-full border border-red-500/20">
+                    <div class="inline-flex items-center px-4 py-2 bg-red-50 rounded-full border border-red-100">
                         <span class="relative flex h-2.5 w-2.5 mr-3"><span
                                 class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span
                                 class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span></span>
-                        <span class="text-xs font-bold text-red-400 tracking-wide uppercase">Registration Portal</span>
+                        <span class="text-xs font-bold text-red-600 tracking-wide uppercase">Registration Portal</span>
                     </div>
                 </div>
             </div>
@@ -111,35 +114,35 @@
 
         <form id="modelRegistrationForm" class="py-10 px-8 md:px-12 space-y-8">
 
-            <!-- Section 1 (No Title) -->
+            <!-- Section 1 -->
             <div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="relative input-icon-wrapper">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">পূর্ণ নাম
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">পূর্ণ নাম
                             <span class="text-studio">*</span></label>
                         <div class="relative"><i
-                                class="fa-regular fa-user absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-regular fa-user absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelName" required
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-studio focus:bg-white focus:ring-4 focus:ring-red-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="আপনার নাম লিখুন"></div>
                     </div>
 
                     <!-- GENDER FIELD -->
                     <div class="md:col-span-1">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">লিঙ্গ
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">লিঙ্গ
                             (Gender) <span class="text-studio">*</span></label>
                         <div class="flex gap-4">
                             <label class="cursor-pointer flex-1 text-center">
                                 <input type="radio" name="gender" value="Male" class="peer sr-only" required>
                                 <div
-                                    class="py-3 rounded-xl border border-gray-700/50 bg-black/40 text-gray-400 peer-checked:bg-blue-500/10 peer-checked:text-blue-400 peer-checked:border-blue-500 transition-all font-medium text-sm">
+                                    class="py-3 rounded-xl border border-gray-300 bg-gray-50 text-gray-600 peer-checked:bg-blue-50 peer-checked:text-blue-600 peer-checked:border-blue-500 transition-all font-medium text-sm shadow-sm">
                                     <i class="fa-solid fa-mars mr-2"></i>Male
                                 </div>
                             </label>
                             <label class="cursor-pointer flex-1 text-center">
                                 <input type="radio" name="gender" value="Female" class="peer sr-only" required>
                                 <div
-                                    class="py-3 rounded-xl border border-gray-700/50 bg-black/40 text-gray-400 peer-checked:bg-pink-500/10 peer-checked:text-pink-400 peer-checked:border-pink-500 transition-all font-medium text-sm">
+                                    class="py-3 rounded-xl border border-gray-300 bg-gray-50 text-gray-600 peer-checked:bg-pink-50 peer-checked:text-pink-600 peer-checked:border-pink-500 transition-all font-medium text-sm shadow-sm">
                                     <i class="fa-solid fa-venus mr-2"></i>Female
                                 </div>
                             </label>
@@ -147,189 +150,189 @@
                     </div>
 
                     <div class="relative input-icon-wrapper">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">বয়স <span
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">বয়স <span
                                 class="text-studio">*</span></label>
                         <div class="relative"><i
-                                class="fa-solid fa-cake-candles absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-solid fa-cake-candles absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="number" id="modelAge" required
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-studio focus:bg-white focus:ring-4 focus:ring-red-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="আপনার বয়স"></div>
                     </div>
 
                     <div class="relative input-icon-wrapper">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">WhatsApp
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">WhatsApp
                             Number <span class="text-studio">*</span></label>
                         <div class="relative"><i
-                                class="fa-brands fa-whatsapp absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-brands fa-whatsapp absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="tel" id="modelPhone" required
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-studio focus:bg-white focus:ring-4 focus:ring-red-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="01XXX-XXXXXX"></div>
                     </div>
 
                     <div class="relative input-icon-wrapper md:col-span-1">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">বর্তমান
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">বর্তমান
                             ঠিকানা <span class="text-studio">*</span></label>
                         <div class="relative"><i
-                                class="fa-solid fa-location-dot absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-solid fa-location-dot absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelAddress" required
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-studio focus:bg-white focus:ring-4 focus:ring-red-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="বর্তমান ঠিকানা"></div>
                     </div>
 
                     <div class="relative input-icon-wrapper md:col-span-1">
                         <label
-                            class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">রেফারেন্স</label>
+                            class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">রেফারেন্স</label>
                         <div class="relative"><i
-                                class="fa-solid fa-user-tag absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-solid fa-user-tag absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelRef"
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-studio focus:bg-white focus:ring-4 focus:ring-red-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="রেফারেন্স (যদি থাকে)"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+            <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
 
-            <!-- Section 2 (No Title - Physical Stats) -->
+            <!-- Section 2 -->
             <div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="relative input-icon-wrapper">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">উচ্চতা
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">উচ্চতা
                             <span class="text-studio">*</span></label>
                         <div class="relative"><i
-                                class="fa-solid fa-arrows-up-down absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-solid fa-arrows-up-down absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelHeight" required
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-studio focus:bg-white focus:ring-4 focus:ring-red-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="যেমন: 5' 6&quot;"></div>
                     </div>
                     <div class="relative input-icon-wrapper">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">ওজন
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">ওজন
                             (Weight)
                             <span class="text-studio">*</span></label>
                         <div class="relative"><i
-                                class="fa-solid fa-weight-scale absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-solid fa-weight-scale absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelWeight" required
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-studio focus:bg-black/60 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-studio focus:bg-white focus:ring-4 focus:ring-red-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="যেমন: 60 kg"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+            <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
 
-            <!-- Section 3 (No Title - Professional & Links) -->
+            <!-- Section 3 -->
             <div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="md:col-span-2">
-                        <label class="block text-xs font-semibold text-gray-400 mb-3 uppercase tracking-wide">পূর্ব
+                        <label class="block text-xs font-semibold text-gray-600 mb-3 uppercase tracking-wide">পূর্ব
                             অভিজ্ঞতা আছে কি? <span class="text-studio">*</span></label>
                         <div class="flex gap-4">
                             <label class="cursor-pointer flex-1 text-center">
                                 <input type="radio" name="experience" value="yes" class="peer sr-only" required>
                                 <div
-                                    class="py-3 rounded-xl border border-gray-700/50 bg-black/40 text-gray-400 peer-checked:bg-red-500/10 peer-checked:text-studio peer-checked:border-red-500 transition-all font-medium">
+                                    class="py-3 rounded-xl border border-gray-300 bg-gray-50 text-gray-600 peer-checked:bg-red-50 peer-checked:text-studio peer-checked:border-red-500 transition-all font-medium shadow-sm">
                                     <i class="fa-solid fa-check mr-2"></i>হ্যাঁ (Yes)
                                 </div>
                             </label>
                             <label class="cursor-pointer flex-1 text-center">
                                 <input type="radio" name="experience" value="no" class="peer sr-only" required>
                                 <div
-                                    class="py-3 rounded-xl border border-gray-700/50 bg-black/40 text-gray-400 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-500 transition-all font-medium">
+                                    class="py-3 rounded-xl border border-gray-300 bg-gray-50 text-gray-600 peer-checked:bg-gray-800 peer-checked:text-white peer-checked:border-gray-800 transition-all font-medium shadow-sm">
                                     <i class="fa-solid fa-xmark mr-2"></i>না (Fresher)
                                 </div>
                             </label>
                         </div>
                     </div>
                     <div class="relative input-icon-wrapper"><label
-                            class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Instagram
+                            class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">Instagram
                             Link</label>
                         <div class="relative"><i
-                                class="fa-brands fa-instagram absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-brands fa-instagram absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelInsta"
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-pink-500 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-pink-500 focus:bg-white focus:ring-4 focus:ring-pink-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="Profile Link"></div>
                     </div>
                     <div class="relative input-icon-wrapper"><label
-                            class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Facebook
+                            class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">Facebook
                             Link</label>
                         <div class="relative"><i
-                                class="fa-brands fa-facebook-f absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-brands fa-facebook-f absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelFB"
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-blue-500 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="Profile Link"></div>
                     </div>
                     <div class="relative input-icon-wrapper md:col-span-1"><label
-                            class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Drive
+                            class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">Drive
                             Portfolio Link (Optional)</label>
                         <div class="relative"><i
-                                class="fa-brands fa-google-drive absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-brands fa-google-drive absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelDrive"
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-green-500 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-green-500 focus:bg-white focus:ring-4 focus:ring-green-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="Google Drive Link"></div>
                     </div>
                     <div class="relative input-icon-wrapper md:col-span-1"><label
-                            class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">TikTok
+                            class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">TikTok
                             Link</label>
                         <div class="relative"><i
-                                class="fa-brands fa-tiktok absolute left-4 top-3.5 text-gray-500 transition-colors"></i><input
+                                class="fa-brands fa-tiktok absolute left-4 top-3.5 text-gray-400 transition-colors"></i><input
                                 type="text" id="modelTikTok"
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-[#ff0050] transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-[#ff0050] focus:bg-white focus:ring-4 focus:ring-[#ff0050]/10 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="TikTok Profile Link"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+            <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
 
-            <!-- Section 4 (Expected Remuneration) -->
+            <!-- Section 4 -->
             <div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="relative input-icon-wrapper md:col-span-1">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Expected
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">Expected
                             Remuneration (Whole Day) <span class="text-studio">*</span></label>
                         <div class="relative">
                             <i
-                                class="fa-solid fa-money-bill-wave absolute left-4 top-3.5 text-gray-500 transition-colors"></i>
+                                class="fa-solid fa-money-bill-wave absolute left-4 top-3.5 text-gray-400 transition-colors"></i>
                             <input type="text" id="remWholeDay" required
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-yellow-500 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-yellow-500 focus:bg-white focus:ring-4 focus:ring-yellow-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="যেমন: 10000 BDT">
                         </div>
                     </div>
                     <div class="relative input-icon-wrapper md:col-span-1">
-                        <label class="block text-xs font-semibold text-gray-400 mb-2 uppercase tracking-wide">Expected
+                        <label class="block text-xs font-semibold text-gray-600 mb-2 uppercase tracking-wide">Expected
                             Remuneration (Per Content) <span class="text-studio">*</span></label>
                         <div class="relative">
                             <i
-                                class="fa-solid fa-hand-holding-dollar absolute left-4 top-3.5 text-gray-500 transition-colors"></i>
+                                class="fa-solid fa-hand-holding-dollar absolute left-4 top-3.5 text-gray-400 transition-colors"></i>
                             <input type="text" id="remPerContent" required
-                                class="w-full bg-black/40 border border-gray-700/50 rounded-xl py-3 pl-11 pr-4 text-white focus:outline-none focus:border-yellow-500 transition-all placeholder-gray-600"
+                                class="w-full bg-gray-50 border border-gray-300 rounded-xl py-3 pl-11 pr-4 text-gray-900 focus:outline-none focus:border-yellow-500 focus:bg-white focus:ring-4 focus:ring-yellow-50 transition-all placeholder-gray-400 shadow-sm"
                                 placeholder="যেমন: 2000 BDT">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent"></div>
+            <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>
 
-            <!-- Section 5 (Image Upload) -->
+            <!-- Section 5 -->
             <div>
                 <div class="flex items-center mb-6">
                     <div
-                        class="w-8 h-8 rounded-lg bg-red-500/10 text-studio flex items-center justify-center mr-3 border border-red-500/20">
+                        class="w-8 h-8 rounded-lg bg-red-100 text-studio flex items-center justify-center mr-3 border border-red-200">
                         <i class="fa-regular fa-images"></i>
                     </div>
-                    <h2 class="text-xl font-bold text-white uppercase tracking-wider">ছবি আপলোড</h2>
+                    <h2 class="text-xl font-bold text-gray-800 uppercase tracking-wider">ছবি আপলোড</h2>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="relative group cursor-pointer"><input type="file" id="casualPhoto" accept="image/*"
                             multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required>
                         <div
-                            class="h-full border-2 border-dashed border-gray-700/50 rounded-2xl p-8 text-center group-hover:border-studio group-hover:bg-red-500/5 transition-all duration-300 bg-black/40">
+                            class="h-full border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center group-hover:border-studio group-hover:bg-red-50 transition-all duration-300 bg-gray-50">
                             <div
-                                class="bg-gray-800 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-studio transition-all duration-300">
+                                class="bg-white shadow-sm w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-studio transition-all duration-300">
                                 <i class="fa-solid fa-camera text-xl text-gray-400 group-hover:text-white"></i>
                             </div>
-                            <h3 class="text-sm font-bold text-gray-300 group-hover:text-studio mb-1">সাধারণ ছবি আপলোড
+                            <h3 class="text-sm font-bold text-gray-700 group-hover:text-studio mb-1">সাধারণ ছবি আপলোড
                             </h3>
                             <p class="text-xs text-gray-500">(একাধিক ছবি)</p>
                             <div id="casualPreviewContainer" class="image-preview-grid"></div>
@@ -338,12 +341,12 @@
                     <div class="relative group cursor-pointer"><input type="file" id="portfolioPhoto" accept="image/*"
                             multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" required>
                         <div
-                            class="h-full border-2 border-dashed border-gray-700/50 rounded-2xl p-8 text-center group-hover:border-studio group-hover:bg-red-500/5 transition-all duration-300 bg-black/40">
+                            class="h-full border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center group-hover:border-studio group-hover:bg-red-50 transition-all duration-300 bg-gray-50">
                             <div
-                                class="bg-gray-800 w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-studio transition-all duration-300">
+                                class="bg-white shadow-sm w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 group-hover:bg-studio transition-all duration-300">
                                 <i class="fa-solid fa-photo-film text-xl text-gray-400 group-hover:text-white"></i>
                             </div>
-                            <h3 class="text-sm font-bold text-gray-300 group-hover:text-studio mb-1">পোর্টফোলিও ছবি
+                            <h3 class="text-sm font-bold text-gray-700 group-hover:text-studio mb-1">পোর্টফোলিও ছবি
                                 আপলোড</h3>
                             <p class="text-xs text-gray-500">(একাধিক ছবি)</p>
                             <div id="portfolioPreviewContainer" class="image-preview-grid"></div>
@@ -354,17 +357,17 @@
 
             <div class="pt-8">
                 <button type="submit"
-                    class="w-full bg-studio text-white font-bold text-xl py-4 rounded-xl shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_30px_rgba(239,68,68,0.6)] hover:bg-red-600 focus:outline-none transition-all flex justify-center items-center gap-3 uppercase tracking-wider"><i
+                    class="w-full bg-studio text-white font-bold text-xl py-4 rounded-xl shadow-[0_10px_20px_rgba(239,68,68,0.25)] hover:shadow-[0_10px_30px_rgba(239,68,68,0.4)] hover:bg-red-600 hover:-translate-y-1 focus:outline-none transition-all flex justify-center items-center gap-3 uppercase tracking-wider"><i
                         class="fa-solid fa-paper-plane"></i> রেজিস্ট্রেশন সম্পন্ন করুন</button>
             </div>
 
             <div id="successMessage"
-                class="hidden mt-6 p-5 bg-green-500/10 border border-green-500/30 text-green-400 rounded-xl flex items-center shadow-lg backdrop-blur animate-[fadeInUp_0.5s_ease-out]">
-                <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center mr-4 shrink-0"><i
-                        class="fa-solid fa-check text-xl"></i></div>
+                class="hidden mt-6 p-5 bg-green-50 border border-green-200 text-green-700 rounded-xl flex items-center shadow-lg animate-[fadeInUp_0.5s_ease-out]">
+                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-4 shrink-0"><i
+                        class="fa-solid fa-check text-xl text-green-600"></i></div>
                 <div>
-                    <h4 class="font-bold text-lg text-green-400">অভিনন্দন!</h4>
-                    <p class="text-sm text-green-500/80">আপনার রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে।</p>
+                    <h4 class="font-bold text-lg text-green-700">অভিনন্দন!</h4>
+                    <p class="text-sm text-green-600">আপনার রেজিস্ট্রেশন সফলভাবে সম্পন্ন হয়েছে।</p>
                 </div>
             </div>
         </form>
@@ -404,7 +407,6 @@
             try {
                 const formData = new FormData();
 
-                // Using IDs securely to fetch data instead of relying on NodeList index
                 const genderRadio = form.querySelector('input[name="gender"]:checked');
                 const experienceRadio = form.querySelector('input[name="experience"]:checked');
 
@@ -416,16 +418,16 @@
                 formData.append('reference', document.getElementById('modelRef').value);
 
                 formData.append('height', document.getElementById('modelHeight').value);
-                formData.append('weight', document.getElementById('modelWeight').value); // Replaced Hair
+                formData.append('weight', document.getElementById('modelWeight').value);
 
                 formData.append('experience', experienceRadio ? experienceRadio.value : '');
                 formData.append('instaLink', document.getElementById('modelInsta').value);
                 formData.append('fbLink', document.getElementById('modelFB').value);
                 formData.append('driveLink', document.getElementById('modelDrive').value);
-                formData.append('tiktokLink', document.getElementById('modelTikTok').value); // Added TikTok
+                formData.append('tiktokLink', document.getElementById('modelTikTok').value);
 
-                formData.append('remWholeDay', document.getElementById('remWholeDay').value); // Added Remuneration
-                formData.append('remPerContent', document.getElementById('remPerContent').value); // Added Remuneration
+                formData.append('remWholeDay', document.getElementById('remWholeDay').value);
+                formData.append('remPerContent', document.getElementById('remPerContent').value);
 
                 const casualFiles = document.getElementById('casualPhoto').files;
                 for (let i = 0; i < casualFiles.length; i++) formData.append('casualPhotos[]', casualFiles[i]);
