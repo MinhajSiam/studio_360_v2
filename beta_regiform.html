@@ -404,9 +404,9 @@
 
             try {
                 const formData = new FormData();
-
                 const genderRadio = form.querySelector('input[name="gender"]:checked');
                 const experienceRadio = form.querySelector('input[name="experience"]:checked');
+
 
                 formData.append('name', document.getElementById('modelName').value);
                 formData.append('gender', genderRadio ? genderRadio.value : '');
@@ -414,16 +414,13 @@
                 formData.append('phone', document.getElementById('modelPhone').value);
                 formData.append('address', document.getElementById('modelAddress').value);
                 formData.append('reference', document.getElementById('modelRef').value);
-
                 formData.append('height', document.getElementById('modelHeight').value);
                 formData.append('weight', document.getElementById('modelWeight').value);
-
                 formData.append('experience', experienceRadio ? experienceRadio.value : '');
                 formData.append('instaLink', document.getElementById('modelInsta').value);
                 formData.append('fbLink', document.getElementById('modelFB').value);
                 formData.append('driveLink', document.getElementById('modelDrive').value);
                 formData.append('tiktokLink', document.getElementById('modelTikTok').value);
-
                 formData.append('remWholeDay', document.getElementById('remWholeDay').value);
                 formData.append('remPerContent', document.getElementById('remPerContent').value);
 
@@ -434,6 +431,7 @@
                 for (let i = 0; i < portfolioFiles.length; i++) formData.append('portfolioPhotos[]', portfolioFiles[i]);
 
                 const response = await fetch('upload.php', { method: 'POST', body: formData });
+
                 const result = await response.json();
 
                 if (result.status === "success") {

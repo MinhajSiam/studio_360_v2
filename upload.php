@@ -10,14 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $phone = preg_replace('/[^0-9]/', '', $_POST['phone'] ?? '000');
     $folderName = trim($name) . '_' . $phone . '_' . time();
     $folderName = str_replace(' ', '_', $folderName);
-    
+
     $targetDir = $baseDir . $folderName . '/';
     mkdir($targetDir, 0777, true);
 
     try {
-        // Gender সহ ডেটা সেভ করা
-        $stmt = $pdo->prepare("INSERT INTO registered_models (folder_name, name, gender, age, phone, address, reference, height, hair, experience, insta_link, fb_link, drive_link) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        
+        $stmt = $pdo->prepare("INSERT INTO registered_models (folder_name, name, gender, age, phone, address, reference, height, weight, experience, insta_link, fb_link, drive_link, tiktok_link, rem_whole_day, rem_per_content) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
         $stmt->execute([
             $folderName,
             $_POST['name'] ?? '',
@@ -27,14 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_POST['address'] ?? '',
             $_POST['reference'] ?? '',
             $_POST['height'] ?? '',
-            $_POST['hair'] ?? '',
+            $_POST['weight'] ?? '',
             $_POST['experience'] ?? '',
             $_POST['instaLink'] ?? '',
             $_POST['fbLink'] ?? '',
-            $_POST['driveLink'] ?? ''
+            $_POST['driveLink'] ?? '',
+            $_POST['tiktokLink'] ?? '',
+            $_POST['remWholeDay'] ?? '',
+            $_POST['remPerContent'] ?? ''
         ]);
 
-        function uploadFiles($fileInputName, $prefix, $targetDir) {
+        function uploadFiles($fileInputName, $prefix, $targetDir)
+        {
             if (isset($_FILES[$fileInputName])) {
                 $total = count($_FILES[$fileInputName]['name']);
                 for ($i = 0; $i < $total; $i++) {
@@ -51,10 +54,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         uploadFiles('portfolioPhotos', 'portfolio', $targetDir);
 
         echo json_encode(['status' => 'success']);
-    } catch(PDOException $e) {
+    } catch (PDOException $e) {
         echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
     }
 } else {
     echo json_encode(['status' => 'error', 'message' => 'Invalid Request']);
 }
-?>
